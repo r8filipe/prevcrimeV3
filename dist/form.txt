@@ -1,0 +1,1 @@
+[][]{"categoria":["The categoria field is required."],"coordenadas":["The coordenadas field is required."],"local":["The local field is required."],"rua":["The rua field is required."],"subcategoria":["The subcategoria field is required."]}\n
