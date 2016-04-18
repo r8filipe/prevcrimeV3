@@ -50,9 +50,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'events/getmap';
-//$route['404_override'] = '';
-//$route['translate_uri_dashes'] = FALSE;
 $route['events'] = 'events';
 $route['events/map'] = 'events/getmap';
+$route['webservice/report'] = 'webservice/report';
+$route['webservice/image/(:num)'] = 'webservice/image/$1';
 
 $route[LOGIN_PAGE] = 'auth/login';

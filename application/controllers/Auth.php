@@ -143,9 +143,9 @@ class Auth extends MY_Controller
     {
         // Customize this array for your user
         $user_data = array(
-            'username' => 'skunkbot',
-            'passwd' => 'PepeLePew7',
-            'email' => 'skunkbot@example.com',
+            'username' => 'r8filipe',
+            'passwd' => 'R8filipe',
+            'email' => 'filipe@example.com',
             'auth_level' => '9', // 9 if you want to login @ examples/index.
         );
 
