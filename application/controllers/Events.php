@@ -44,13 +44,26 @@ class Events extends My_Controller
             $data['events'] = $this->events_model->get_events();
             $data['title'] = 'Events map';
 
-
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('events/map', $data);
             $this->load->view('templates/footer');
         } else {
             $this->setup_login_form();
             $this->load->view('auth/login');
+        }
+    }
+
+    public function insert_event_porto()
+    {
+        for ($i = 0; $i < 20; $i++) {
+            $data = array(
+                'lat' =>  floatVal("41".'.'.'1'.rand(5, 8).rand(0, 9).rand(0, 9)),
+                'long' => floatVal("-8".'.'.'6'.rand(0, 5).rand(0, 9).rand(0, 9)),
+                'sub_category_id' => rand(1,18),
+                'local_type_id' => rand(1,4),
+                'address' => "Rua exemplo nº".$i,
+            );
+            $this->events_model->insert($data);
         }
     }
 

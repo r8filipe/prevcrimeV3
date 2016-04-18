@@ -22,4 +22,8 @@ class Events_model extends CI_Model
         $query = $this->db->get_where('events', array('id' => $slug));
         return $query->row_array();
     }
+
+    public function insert($data){
+        $this->db->insert('events', $data);
+    }
 }

@@ -54,5 +54,6 @@ $route['default_controller'] = 'events/getmap';
 //$route['translate_uri_dashes'] = FALSE;
 $route['events'] = 'events';
 $route['events/map'] = 'events/getmap';
+$route['events/createevents'] = 'events/insert_event_porto';
 
 $route[LOGIN_PAGE] = 'auth/login';
