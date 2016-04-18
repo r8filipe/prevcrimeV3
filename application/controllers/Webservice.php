@@ -6,6 +6,7 @@ class Webservice extends My_Controller
     {
         parent::__construct();
         $this->load->model('events_model');
+        $this->load->model('photos_model');
         $this->load->helper('url_helper');
         $this->load->helper('url');
         $this->load->helper('form');
@@ -46,14 +47,22 @@ class Webservice extends My_Controller
         $message['status'] = 'FAIL';
 
         if ($id != NULL) {
-            $target_path = "uploads/";
-            $target_path = $target_path . basename($_FILES['image']['name']);
+            $target_path = "images/";
+            $ext = explode('.', basename($_FILES['image']['name']));
+            $type = $ext[count($ext) - 1];
+            $rename = hash('sha256', basename($_FILES['image']['name'])) . '.' . $type;
+            $target_path = $target_path . $rename;
 
             try {
                 if (!move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
                     throw new Exception('Could not move file');
                 } else {
                     $message['status'] = 'SUCCESS';
+                    $data = array(
+                        'event_id' => $id,
+                        'photo' => $rename,
+                    );
+                    $this->photos_model->insert($data);
                 }
 
             } catch (Exception $e) {

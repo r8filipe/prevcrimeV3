@@ -55,5 +55,7 @@ $route['events/details/(:event)'] = 'events/details/$1';
 $route['events/map'] = 'events/getmap';
 $route['webservice/report'] = 'webservice/report';
 $route['webservice/image/(:num)'] = 'webservice/image/$1';
+$route['webservice/image/(:num)'] = 'webservice/image/$1';
+$route['events/createevents'] = 'events/insert_event_porto';
 
 $route[LOGIN_PAGE] = 'auth/login';

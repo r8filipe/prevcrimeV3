@@ -11,10 +11,8 @@
                 </div>
                 <script>
                     var vectorSource = new ol.source.Vector({});
-                    {
-                        events
-                    }
-
+                    {events}
+                    console.log('{icon}');
                     var iconFeature = new ol.Feature({
                         geometry: new ol.geom.Point(ol.proj.transform([{long}, {lat}], 'EPSG:4326',
                             'EPSG:3857')),
@@ -32,9 +30,7 @@
                     });
                     iconFeature.setStyle(iconStyle);
                     vectorSource.addFeature(iconFeature);
-                    {/
-                        events
-                    }
+                    {/events}
                     var vectorLayer = new ol.layer.Vector({
                         source: vectorSource,
                         style: iconStyle
