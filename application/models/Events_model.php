@@ -23,4 +23,8 @@ class Events_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function insert($data){
+        $this->db->insert('events', $data);
+    }
 }

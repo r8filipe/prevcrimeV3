@@ -10,14 +10,15 @@
                     <div id="popup"></div>
                 </div>
                 <script>
-                    var vectorSource = new ol.source.Vector({
-                    });
-                    {events}
-                    console.log({long} + ' '+ {lat});
+                    var vectorSource = new ol.source.Vector({});
+                    {
+                        events
+                    }
+
                     var iconFeature = new ol.Feature({
                         geometry: new ol.geom.Point(ol.proj.transform([{long}, {lat}], 'EPSG:4326',
-                        'EPSG:3857')),
-                    name: '{{son_encode(address)}',
+                            'EPSG:3857')),
+                        name: "{address}",
                         population: 4000,
                         rainfall: 500
                     });
@@ -26,12 +27,14 @@
                             anchor: [0.5, 0.75],
                             scale: 1,
                             opacity: 0.75,
-                            src: '<?php echo base_url(); ?>dist/ol/icons/marker.png'
+                            src: '<?php echo base_url(); ?>dist/ol/icons/{icon}.png'
                         }))
                     });
                     iconFeature.setStyle(iconStyle);
                     vectorSource.addFeature(iconFeature);
-                    {/events}
+                    {/
+                        events
+                    }
                     var vectorLayer = new ol.layer.Vector({
                         source: vectorSource,
                         style: iconStyle
@@ -47,8 +50,9 @@
                         layers: [rasterLayer, vectorLayer],
                         target: document.getElementById('map'),
                         view: new ol.View({
-                            center: ol.proj.transform([-8.6291053, 41.1579438], 'EPSG:4326', 'EPSG:3857'),
-                            zoom: 14
+                            center: ol.proj.transform([-8.6191053, 41.1579438], 'EPSG:4326', 'EPSG:3857'),
+                            zoom: 14,
+                            minZoom: 13
                         }),
 
                         layers: [
@@ -72,9 +76,9 @@
                     map.addOverlay(popup);
 
                     // display popup on click
-                    map.on('click', function(evt) {
+                    map.on('click', function (evt) {
                         var feature = map.forEachFeatureAtPixel(evt.pixel,
-                            function(feature, layer) {
+                            function (feature, layer) {
                                 return feature;
                             });
                         if (feature) {
@@ -93,9 +97,9 @@
                     });
 
                     // change mouse cursor when over marker
-                    $(map.getViewport()).on('mousemove', function(e) {
+                    $(map.getViewport()).on('mousemove', function (e) {
                         var pixel = map.getEventPixel(e.originalEvent);
-                        var hit = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+                        var hit = map.forEachFeatureAtPixel(pixel, function (feature, layer) {
                             return true;
                         });
                         if (hit) {
