@@ -51,6 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'events/getmap';
 $route['events'] = 'events';
+$route['events/details/(:event)'] = 'events/details/$1';
 $route['events/map'] = 'events/getmap';
 $route['webservice/report'] = 'webservice/report';
 $route['webservice/image/(:num)'] = 'webservice/image/$1';

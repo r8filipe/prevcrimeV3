@@ -14,8 +14,6 @@
                         <tr>
                             <th>ID</th>
                             <th>Morada</th>
-                            <th>Latitude</th>
-                            <th>Longitude</th>
                             <th>Categoria</th>
                             <th>Ocorrência</th>
                             <th>Local</th>
@@ -27,14 +25,12 @@
                         {events}
                         <tr class="gradeU">
                             <td>{id}</td>
-                            <td>{address}
-                            <td class="center">{lat}
-                            <td  class="center">{long}
-                            <td class="center">{sub_category->category->description}
-                            <td class="center">{description}
-                            <td class="center">{local_type->description}
-                            <td class="center">{created_at}
-                            <td class="center">-</td>
+                            <td>{address}</td>
+                            <td class="center">{category}</td>
+                            <td class="center">{occurrence}</td>
+                            <td class="center">{local_type_id}</td>
+                            <td class="center">{created_at}</td>
+                            <td class="center"> <a href="<?php echo base_url(); ?>events/details/{id}">Ver</a></td>
                         </tr>
                        {/events}
                         </tbody>
