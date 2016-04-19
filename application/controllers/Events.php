@@ -46,7 +46,6 @@ class Events extends My_Controller
             $data['events'] = $this->events_model->get_events();
             $data['title'] = 'Events map';
 
-
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('events/map', $data);
             $this->load->view('templates/footer');

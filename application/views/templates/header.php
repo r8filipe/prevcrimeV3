@@ -1,4 +1,10 @@
-<html lang="en">
+<?php
+//Obtain User language
+$idiom = 'portuguese';
+//Load of language file
+$this->lang->load('master_lang', $idiom);
+?>
+<html>
 
 <head>
 
@@ -8,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PrevCrime Admin</title>
+    <title><?php echo $this->lang->line('master_title'); ?></title>
     <!-- OpenLayers 3 CSS -->
     <link href="<?php echo base_url(); ?>dist/ol/ol.css" rel="stylesheet">
 
@@ -59,7 +65,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Prevcrime</a>
+            <a class="navbar-brand" href="index.html"><?php echo $this->lang->line('master_appName'); ?></a>
         </div>
         <!-- /.navbar-header -->
 
@@ -157,7 +163,7 @@
                 <ul class="nav" id="side-menu">
                     <li class="sidebar-search">
                         <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Search...">
+                            <input type="text" class="form-control" placeholder="<?php echo $this->lang->line('master_search'); ?>">
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
@@ -167,10 +173,10 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>events"><i class="fa fa-bug"></i> Ocorrencias</a>
+                        <a href="<?php echo base_url(); ?>events"><i class="fa fa-bug"></i><?php echo $this->lang->line('master_menuOccurrences'); ?></a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>events/map"><i class="fa fa-globe"></i> Mapa</a>
+                        <a href="<?php echo base_url(); ?>events/map"><i class="fa fa-globe"></i><?php echo $this->lang->line('master_menuMap'); ?></a>
                     </li>
                 </ul>
             </div>
