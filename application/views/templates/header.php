@@ -65,7 +65,8 @@ $this->lang->load('master_lang', $idiom);
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html"><?php echo $this->lang->line('master_appName'); ?></a>
+            <a class="navbar-brand"
+               href="<?php echo base_url(); ?>"><?php echo $this->lang->line('master_appName'); ?></a>
         </div>
         <!-- /.navbar-header -->
 
@@ -163,7 +164,8 @@ $this->lang->load('master_lang', $idiom);
                 <ul class="nav" id="side-menu">
                     <li class="sidebar-search">
                         <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="<?php echo $this->lang->line('master_search'); ?>">
+                            <input type="text" class="form-control"
+                                   placeholder="<?php echo $this->lang->line('master_search'); ?>">
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
@@ -173,10 +175,12 @@ $this->lang->load('master_lang', $idiom);
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>events"><i class="fa fa-bug"></i><?php echo $this->lang->line('master_menuOccurrences'); ?></a>
+                        <a href="<?php echo base_url(); ?>events"><i
+                                class="fa fa-bug"></i><?php echo $this->lang->line('master_menuOccurrences'); ?></a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>events/map"><i class="fa fa-globe"></i><?php echo $this->lang->line('master_menuMap'); ?></a>
+                        <a href="<?php echo base_url(); ?>events/map"><i
+                                class="fa fa-globe"></i><?php echo $this->lang->line('master_menuMap'); ?></a>
                     </li>
                 </ul>
             </div>

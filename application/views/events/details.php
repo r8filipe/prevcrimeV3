@@ -129,7 +129,7 @@ $this->lang->load('details_lang', $idiom);
                     });
                     iconFeature.setStyle(iconStyle);
                     vectorSource.addFeature(iconFeature);
-                    {/event}
+
                     var vectorLayer = new ol.layer.Vector({
                         source: vectorSource,
                         style: iconStyle
@@ -145,7 +145,7 @@ $this->lang->load('details_lang', $idiom);
                         layers: [rasterLayer, vectorLayer],
                         target: document.getElementById('map'),
                         view: new ol.View({
-                            center: ol.proj.transform([-8.6191053, 41.1579438], 'EPSG:4326', 'EPSG:3857'),
+                            center: ol.proj.transform([{long}, {lat}], 'EPSG:4326', 'EPSG:3857'),
                             zoom: 14,
                             minZoom: 13
                         }),
@@ -160,7 +160,7 @@ $this->lang->load('details_lang', $idiom);
                             vectorLayer
                         ]
                     });
-
+                    {/event}
                     var element = document.getElementById('popup');
 
                     var popup = new ol.Overlay({
