@@ -100,7 +100,6 @@ CREATE TABLE IF NOT EXISTS `events` (
   `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `obs` varchar(255),
   PRIMARY KEY (`id`),
   KEY `events_sub_category_id_foreign` (`sub_category_id`),
   KEY `events_local_type_id_foreign` (`local_type_id`),
