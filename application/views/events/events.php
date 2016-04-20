@@ -1,10 +1,14 @@
-
-<!-- /.row -->
+<?php
+//Obtain User language
+$idiom = 'portuguese';
+//Load of language file
+$this->lang->load('events_lang', $idiom);
+?>
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Listagem dos Eventos
+                <?php echo $this->lang->line('events_containerTitle'); ?>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -12,29 +16,25 @@
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Morada</th>
-                            <th>Latitude</th>
-                            <th>Longitude</th>
-                            <th>Categoria</th>
-                            <th>Ocorrência</th>
-                            <th>Local</th>
-                            <th>Data/Hora</th>
-                            <th>Opções</th>
+                            <th><?php echo $this->lang->line('events_columnId'); ?></th>
+                            <th><?php echo $this->lang->line('events_columnAddress'); ?></th>
+                            <th><?php echo $this->lang->line('events_columnCategory'); ?></th>
+                            <th><?php echo $this->lang->line('events_columnOccurence'); ?></th>
+                            <th><?php echo $this->lang->line('events_columnLocal'); ?></th>
+                            <th><?php echo $this->lang->line('events_columnDateTime'); ?></th>
+                            <th><?php echo $this->lang->line('events_columnOptions'); ?></th>
                         </tr>
                         </thead>
                         <tbody>
                         {events}
                         <tr class="gradeU">
                             <td>{id}</td>
-                            <td>{address}
-                            <td class="center">{lat}
-                            <td  class="center">{long}
-                            <td class="center">{sub_category->category->description}
-                            <td class="center">{description}
-                            <td class="center">{local_type->description}
-                            <td class="center">{created_at}
-                            <td class="center">-</td>
+                            <td>{address}</td>
+                            <td class="center">{category}</td>
+                            <td class="center">{occurrence}</td>
+                            <td class="center">{local_type_id}</td>
+                            <td class="center">{created_at}</td>
+                            <td class="center"> <a href="<?php echo base_url(); ?>events/details/{id}"><?php echo $this->lang->line('events_optionWatch'); ?></a></td>
                         </tr>
                        {/events}
                         </tbody>
