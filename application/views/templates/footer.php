@@ -18,7 +18,7 @@
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
     $(document).ready(function () {
-        $('#dataTables-example').DataTable({
+        $('#dataTables-event').DataTable({
             responsive: true,
             order: [[0, "desc"]]
         });

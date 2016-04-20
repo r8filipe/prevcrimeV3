@@ -13,7 +13,7 @@ $this->lang->load('events_lang', $idiom);
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="dataTable_wrapper">
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-event">
                         <thead>
                         <tr>
                             <th><?php echo $this->lang->line('events_columnId'); ?></th>
