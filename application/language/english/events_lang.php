@@ -33,4 +33,6 @@ $lang = array(
 
     'events_columnOptions'       => 'Options',
 
+    'events_optionWatch'         => 'Details',
+
 );

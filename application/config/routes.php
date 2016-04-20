@@ -49,10 +49,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+//Default route
 $route['default_controller'] = 'events/getmap';
+
+//Events routes
 $route['events'] = 'events';
 $route['events/details/(:event)'] = 'events/details/$1';
 $route['events/map'] = 'events/getmap';
+
+//Users routes
+$route['users'] = 'users';
+$route['users/details/(:user)'] = 'users/details/$1';
+$route['users/createUser/'] = 'users/createUser/';
+
+//Web-service routes
 $route['webservice/report'] = 'webservice/report';
 $route['webservice/image/(:num)'] = 'webservice/image/$1';
 $route['webservice/image/(:num)'] = 'webservice/image/$1';

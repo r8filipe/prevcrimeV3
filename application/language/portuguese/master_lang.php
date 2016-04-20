@@ -17,4 +17,8 @@ $lang = array(
 
     'master_menuMap'         => 'Mapa',
 
+    'master_menuUsers'       => 'Utilizadores',
+
+    'master_menuCreateUser'  => 'Criar utilizador',
+
 );
