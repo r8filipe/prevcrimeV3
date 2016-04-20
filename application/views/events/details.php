@@ -1,24 +1,117 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Henrique
+ * Date: 18/04/2016
+ * Time: 01:46
+ */
 //Obtain User language
 $idiom = 'portuguese';
 //Load of language file
-$this->lang->load('map_lang', $idiom);
+$this->lang->load('details_lang', $idiom);
 ?>
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <?php echo $this->lang->line('map_containerTitle'); ?>
+                <?php echo $this->lang->line('details_containerTitle'); ?>
             </div>
-            <!-- /.panel-heading -->
             <div class="panel-body">
-                <div id="map" class="map" style="height: 500px">
+                <div class="row">
+                    <div class="col-lg-6">
+                        {event}
+                        <label><?php echo $this->lang->line('details_address'); ?></label>
+                        <p>{address}</p>
+                        <label><?php echo $this->lang->line('details_coordinates'); ?></label>
+                        <p>{lat}, {long}</p>
+                        <label><?php echo $this->lang->line('details_category'); ?></label>
+                        <p>{category}</p>
+                        <label><?php echo $this->lang->line('details_subCategory'); ?></label>
+                        <p>{occurrence}</p>
+                        <label><?php echo $this->lang->line('details_registerBy'); ?></label>
+                        <p>user do evento</p>
+                        <label><?php echo $this->lang->line('details_createdAt'); ?></label>
+                        <p>{created_at}</p>
+                        {/event}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-6 -->
+
+    <!-- /.col-lg-6 -->
+<!--    <div class="col-lg-6">-->
+<!--        <div class="panel panel-default">-->
+<!--            <div class="panel-heading">-->
+<!--                Um gráfico de uma estatistica-->
+<!--    <?php //echo $this->lang->line('details_graphicOfStatistic'); ?>-->
+<!--            </div>-->
+<!--            <div class="panel-body">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <!-- /.col-lg-6 -->
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Fotografias
+            </div>
+            <div class="panel-body" style="height: 330px">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <?php
+                        for ($i = 0; $i < count($photos); $i++) {
+                            echo ' <li data-target="#myCarousel" data-slide-to="' . $i . '"></li> ';
+                        }
+
+                        ?>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+
+
+                        <?php
+                        for ($i = 0; $i < count($photos); $i++) {
+//                            var_dump($photos[$i]['photo']);
+                            $photo = $photos[$i]['photo'];
+                            echo ($i == 0) ? '<div class="item active" >' : '<div class="item">';
+                            echo "<img src='" . base_url() . "images/$photo' height=\"300\"/>";
+                            echo '</div>';
+                        }
+                        ?>
+                    </div>
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?php echo $this->lang->line('details_map');?>
+            </div>
+            <div class="panel-body" style="height: 330px">
+                <div id="map" class="map">
                     <div id="popup"></div>
                 </div>
                 <script>
                     var vectorSource = new ol.source.Vector({});
-                    {events}
-                    console.log('{icon}');
+                    {event}
+
                     var iconFeature = new ol.Feature({
                         geometry: new ol.geom.Point(ol.proj.transform([{long}, {lat}], 'EPSG:4326',
                             'EPSG:3857')),
@@ -31,12 +124,12 @@ $this->lang->load('map_lang', $idiom);
                             anchor: [0.5, 0.75],
                             scale: 1,
                             opacity: 0.75,
-                            src: '<?php echo base_url(); ?>dist/ol/icons/{icon}.png'
+                            src: ' <?php echo base_url(); ?>dist/ol/icons/{icon}.png'
                         }))
                     });
                     iconFeature.setStyle(iconStyle);
                     vectorSource.addFeature(iconFeature);
-                    {/events}
+
                     var vectorLayer = new ol.layer.Vector({
                         source: vectorSource,
                         style: iconStyle
@@ -52,7 +145,7 @@ $this->lang->load('map_lang', $idiom);
                         layers: [rasterLayer, vectorLayer],
                         target: document.getElementById('map'),
                         view: new ol.View({
-                            center: ol.proj.transform([-8.6191053, 41.1579438], 'EPSG:4326', 'EPSG:3857'),
+                            center: ol.proj.transform([{long}, {lat}], 'EPSG:4326', 'EPSG:3857'),
                             zoom: 14,
                             minZoom: 13
                         }),
@@ -67,7 +160,7 @@ $this->lang->load('map_lang', $idiom);
                             vectorLayer
                         ]
                     });
-
+                    {/event}
                     var element = document.getElementById('popup');
 
                     var popup = new ol.Overlay({
@@ -112,10 +205,9 @@ $this->lang->load('map_lang', $idiom);
                     });
                 </script>
             </div>
-            <!-- /.panel-body -->
         </div>
         <!-- /.panel -->
     </div>
-    <!-- /.col-lg-12 -->
+    <!-- /.col-lg-6 -->
 </div>
 <!-- /.row -->

@@ -13,7 +13,7 @@ $this->lang->load('events_lang', $idiom);
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="dataTable_wrapper">
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-event">
                         <thead>
                         <tr>
                             <th><?php echo $this->lang->line('events_columnId'); ?></th>
@@ -34,7 +34,7 @@ $this->lang->load('events_lang', $idiom);
                             <td class="center">{occurrence}</td>
                             <td class="center">{local_type_id}</td>
                             <td class="center">{created_at}</td>
-                            <td class="center"> <a href="<?php echo base_url(); ?>events/details/{id}"><?php echo $this->lang->line('events_optionWatch'); ?></a></td>
+                            <td class="center"> <a href="<?php echo base_url(); ?>events/details/{id}">Ver</a></td>
                         </tr>
                        {/events}
                         </tbody>

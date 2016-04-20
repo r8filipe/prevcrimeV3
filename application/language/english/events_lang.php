@@ -7,7 +7,7 @@
  */
 $lang = array(
 
-    'events_title'               => 'Events',
+    'events_title'               => 'Event',
 
     'events_containerTitle'      => 'Events list',
 

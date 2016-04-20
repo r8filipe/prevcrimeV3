@@ -65,5 +65,7 @@ $route['users/createUser/'] = 'users/createUser/';
 //Web-service routes
 $route['webservice/report'] = 'webservice/report';
 $route['webservice/image/(:num)'] = 'webservice/image/$1';
+$route['webservice/image/(:num)'] = 'webservice/image/$1';
+$route['events/createevents'] = 'events/insert_event_porto';
 
 $route[LOGIN_PAGE] = 'auth/login';
