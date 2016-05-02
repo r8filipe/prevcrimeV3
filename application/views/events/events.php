@@ -16,7 +16,6 @@ $this->lang->load('events_lang', $idiom);
                     <table class="table table-striped table-bordered table-hover" id="dataTables-event">
                         <thead>
                         <tr>
-                            <th><?php echo $this->lang->line('events_columnId'); ?></th>
                             <th><?php echo $this->lang->line('events_columnAddress'); ?></th>
                             <th><?php echo $this->lang->line('events_columnCategory'); ?></th>
                             <th><?php echo $this->lang->line('events_columnOccurence'); ?></th>
@@ -28,13 +27,15 @@ $this->lang->load('events_lang', $idiom);
                         <tbody>
                         {events}
                         <tr class="gradeU">
-                            <td>{id}</td>
                             <td>{address}</td>
                             <td class="center">{category}</td>
                             <td class="center">{occurrence}</td>
                             <td class="center">{local_type_id}</td>
                             <td class="center">{created_at}</td>
-                            <td class="center"> <a href="<?php echo base_url(); ?>events/details/{id}">Ver</a></td>
+                            <td class="center">
+                                <a href="<?php echo base_url(); ?>events/details/{id}"><?php echo $this->lang->line('events_optionWatch'); ?></a>
+                                <a href="<?php echo base_url(); ?>events/details/{id}"><?php echo $this->lang->line('events_optionEdit'); ?></a>
+                            </td>
                         </tr>
                        {/events}
                         </tbody>

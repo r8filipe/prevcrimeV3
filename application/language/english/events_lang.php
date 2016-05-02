@@ -35,4 +35,6 @@ $lang = array(
 
     'events_optionWatch'         => 'Details',
 
+    'events_optionEdit'         => 'Edit',
+
 );
