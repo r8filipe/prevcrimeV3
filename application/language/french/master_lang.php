@@ -7,18 +7,18 @@
  */
 $lang = array(
 
-    'master_title'           => 'PrevCrime Administração',
+    'master_title'           => 'PrevCrime Administration',
 
     'master_appName'         => 'PrevCrime',
 
-    'master_search'          => 'Pesquisar',
+    'master_search'          => 'Rechercher',
 
-    'master_menuOccurrences' => 'Ocurrências',
+    'master_menuOccurrences' => 'Occurrences',
 
-    'master_menuMap'         => 'Mapa',
+    'master_menuMap'         => 'Carte',
 
-    'master_menuUsers'       => 'Utilizadores',
+    'master_menuUsers'       => 'Utilisateurs',
 
-    'master_menuCreateUser'  => 'Criar utilizador',
+    'master_menuCreateUser'  => 'Créer utilisateur',
 
 );

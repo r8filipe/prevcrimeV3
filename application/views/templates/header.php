@@ -28,6 +28,9 @@ $this->lang->load('master_lang', $idiom);
     <link href="<?php echo base_url(); ?>dist/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
+    <link href="<?php echo base_url(); ?>dist/datatables/media/css/dataTables.fixedHeader.css"
+          rel="stylesheet">
+
     <link href="<?php echo base_url(); ?>dist/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
           rel="stylesheet">
 

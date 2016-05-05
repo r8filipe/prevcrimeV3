@@ -19,7 +19,7 @@ $this->lang->load('events_lang', $idiom);
                             <th><?php echo $this->lang->line('events_columnId'); ?></th>
                             <th><?php echo $this->lang->line('events_columnAddress'); ?></th>
                             <th><?php echo $this->lang->line('events_columnCategory'); ?></th>
-                            <th><?php echo $this->lang->line('events_columnOccurence'); ?></th>
+                            <th><?php echo $this->lang->line('events_columnOccurrence'); ?></th>
                             <th><?php echo $this->lang->line('events_columnLocal'); ?></th>
                             <th><?php echo $this->lang->line('events_columnDateTime'); ?></th>
                             <th><?php echo $this->lang->line('events_columnOptions'); ?></th>

@@ -8,6 +8,7 @@
 <script src="<?php echo base_url(); ?>dist/metisMenu/dist/metisMenu.min.js"></script>
 
 <!-- DataTables JavaScript -->
+
 <script src="<?php echo base_url(); ?>dist/datatables/media/js/jquery.dataTables.min.js"></script>
 <script
     src="<?php echo base_url(); ?>dist/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
@@ -22,7 +23,7 @@
             responsive: true,
             order: [[0, "desc"]]
         });
-    });
+    } );
 </script>
 
 </body>

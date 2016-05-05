@@ -7,7 +7,7 @@
  */
 $lang = array(
 
-    'userDetails_containerTitle' => 'User x',
+    'userDetails_containerTitle' => 'User',
 
     'userDetails_username'       => 'Username',
 

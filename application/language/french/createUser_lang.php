@@ -11,7 +11,7 @@ $lang = array(
 
     'createUser_username'       => 'Nom d\'utilisateur',
 
-    'createUser_email'          => 'email',
+    'createUser_email'          => 'Email',
 
     'createUser_authLevel'      => 'Niveau d\'autorisation',
 
@@ -21,14 +21,14 @@ $lang = array(
 
     'createUser_staff'          => 'Employé',
 
-    'createUser_scavenger'      => 'Colecionador',
+    'createUser_scavenger'      => 'Collectionneur',
 
-    'createUser_banned'         => 'Banido?',
+    'createUser_banned'         => 'Interdit?',
     
-    'createUser_password'       => 'Palavra-chave',
+    'createUser_password'       => 'Mot-clé',
 
-    'createUser_submitBtn'      => 'Submeter',
+    'createUser_submitBtn'      => 'Soumettre',
 
-    'createUser_resetBtn'       => 'Limpar',
+    'createUser_resetBtn'       => 'Nettoyer',
     
 );

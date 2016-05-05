@@ -7,18 +7,18 @@
  */
 $lang = array(
 
-    'userDetails_containerTitle' => 'Utilizador x',
+    'userDetails_containerTitle' => 'Utilisateur',
 
-    'userDetails_username'       => 'Nome de Utilizador',
+    'userDetails_username'       => 'Nom d\'utilisateur',
 
-    'userDetails_email'          => 'e-mail',
+    'userDetails_email'          => 'Email',
 
-    'userDetails_authLevel'      => 'Nível de autorização',
+    'userDetails_authLevel'      => 'Niveau d\'autorisation',
 
-    'userDetails_banned'         => 'Banido?',
+    'userDetails_banned'         => 'Interdit?',
 
-    'userDetails_lastLogin'      => 'Última visita em',
+    'userDetails_lastLogin'      => 'Dernière visite : ',
 
-    'userDetails_createdAt'      => 'Criado em',
+    'userDetails_createdAt'      => 'Créé en',
 
 );

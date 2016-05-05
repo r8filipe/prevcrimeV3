@@ -7,33 +7,33 @@
  */
 $lang = array(
 
-    'events_title'               => 'Evento',
+    'events_title'               => 'Événement',
 
-    'events_containerTitle'      => 'Listagem dos eventos',
+    'events_containerTitle'      => 'Liste des événementss',
 
-    'events_beforeDropdownLabel' => 'Mostrar',
+    'events_beforeDropdownLabel' => 'Montrer',
 
-    'events_afterDropdownLabel'  => 'entradas.',
+    'events_afterDropdownLabel'  => 'entrées.',
 
     'events_columnId'            => 'ID',
 
-    'events_columnAddress'       => 'Endereço',
+    'events_columnAddress'       => 'Adresse',
 
     'events_columnLatitude'      => 'Latitude',
 
     'events_columnLongitude'     => 'Longitude',
 
-    'events_columnCategory'      => 'Categoria',
+    'events_columnCategory'      => 'Catégorie',
 
-    'events_columnOccurrence'    => 'Ocorrência',
+    'events_columnOccurrence'    => 'Occurrence',
 
-    'events_columnLocal'         => 'Local',
+    'events_columnLocal'         => 'Place',
 
-    'events_columnDateTime'      => 'Data/Hora',
+    'events_columnDateTime'      => 'Date/Heure',
 
-    'events_columnOptions'       => 'Opções',
+    'events_columnOptions'       => 'Options',
 
-    'events_optionWatch'         => 'Ver',
+    'events_optionWatch'         => 'Voir',
 
     'events_optionEdit'         =>  'Éditer',
 

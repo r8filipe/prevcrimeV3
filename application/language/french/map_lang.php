@@ -7,7 +7,7 @@
  */
 $lang = array(
 
-    'map_containerTitle' => 'Mapa',
-    'map_Title' => 'Mapa',
+    'map_containerTitle' => 'Carte',
+    'map_Title' => 'Carte',
 
 );
