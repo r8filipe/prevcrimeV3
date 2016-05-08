@@ -56,6 +56,7 @@ $route['default_controller'] = 'events/getmap';
 $route['events'] = 'events';
 $route['events/details/(:event)'] = 'events/details/$1';
 $route['events/map'] = 'events/getmap';
+$route['events/editEvent'] = 'events/editEvent';
 
 //Users routes
 $route['users'] = 'users';
@@ -66,6 +67,7 @@ $route['users/createUser/'] = 'users/createUser/';
 $route['webservice/report'] = 'webservice/report';
 $route['webservice/image/(:num)'] = 'webservice/image/$1';
 $route['webservice/image/(:num)'] = 'webservice/image/$1';
+
 $route['events/createevents'] = 'events/insert_event_porto';
 
 $route[LOGIN_PAGE] = 'auth/login';

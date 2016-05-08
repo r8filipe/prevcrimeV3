@@ -1,6 +1,10 @@
 <?php
 //Obtain User language
-$idiom = 'portuguese';
+if(isset($_SESSION['language'])){
+    $idiom = $_SESSION['language'];
+}else {
+    $idiom = $this->config->item('language');
+}
 //Load of language file
 $this->lang->load('master_lang', $idiom);
 ?>
@@ -71,7 +75,15 @@ $this->lang->load('master_lang', $idiom);
         <!-- /.navbar-header -->
 
         <ul class="nav navbar-top-links navbar-right">
-
+            <a href="<?php echo base_url(); ?>language_switch/switchLanguage/portuguese">
+                <img src="./dist/flags/Portugal.png" />
+            </a>
+            <a href="<?php echo base_url(); ?>language_switch/switchLanguage/english">
+                <img src="./dist/flags/England.png" />
+            </a>
+            <a href="<?php echo base_url(); ?>language_switch/switchLanguage/french">
+                <img src="./dist/flags/France.png" />
+            </a>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>

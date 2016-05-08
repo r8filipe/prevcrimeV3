@@ -10,7 +10,7 @@ class Events_model extends CI_Model
 
     public function get_events($slug = FALSE)
     {
-        $this->db->select('events.id, lat, long, sub_categories.occurrence, categories.category, local_type_id, address, events.created_at, icon');
+        $this->db->select('events.id, lat, long, obs, sub_categories.occurrence, categories.category, local_type_id, address, events.created_at, icon');
         $this->db->from('events');
         $this->db->join('sub_categories', 'sub_categories.id = events.sub_category_id');
         $this->db->join('categories', 'categories.id = sub_categories.category_id');
@@ -26,5 +26,15 @@ class Events_model extends CI_Model
 
     public function insert($data){
         $this->db->insert('events', $data);
+    }
+
+    public function edit_event($id, $data){
+        $this->db->where('id', $id);
+        $this->db->update('events', $data);
+    }
+
+    public function uploadPhoto($data){
+
+        $this->db->insert('photos', $data);
     }
 }
