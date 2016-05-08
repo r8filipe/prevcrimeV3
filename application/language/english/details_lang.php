@@ -21,6 +21,12 @@ $lang = array(
 
     'details_createdAt' => 'Created At',
 
+    'details_containerObs'       => 'Observations',
+
+    'details_submitBtn'          => 'Submit',
+
+    'details_containerPhotos'    => 'Photos',
+
     'details_map' => 'Map',
 
     'details_graphicOfStatistic' => 'Graphic of a Statistic',

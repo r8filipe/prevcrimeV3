@@ -66,4 +66,13 @@ class Users extends My_Controller{
             $this->load->view('auth/login');
         }
     }
+
+    public function editUser($id, $username, $email, $role, $ban, $passwd){
+        $result = array( 'username'=>$username,
+            'email'=>$email,
+            'auth_level'=>$role,
+            'banned'=>$ban,
+            'passwd'=>$passwd);
+        $this->Users_model->edit_user( $id , $result );
+    }
 }

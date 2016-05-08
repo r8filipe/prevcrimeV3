@@ -9,8 +9,8 @@
 
 <!-- DataTables JavaScript -->
 <script src="<?php echo base_url(); ?>dist/datatables/media/js/jquery.dataTables.min.js"></script>
-<script
-    src="<?php echo base_url(); ?>dist/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>dist/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>dist/datatables/media/js/dataTables.fixedHeader.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
 <script src="<?php echo base_url(); ?>dist/custom/js/sb-admin-2.js"></script>
@@ -22,6 +22,7 @@
             responsive: true,
             order: [[0, "desc"]]
         });
+        new $.fn.dataTable.FixedHeader( table );
     });
 </script>
 

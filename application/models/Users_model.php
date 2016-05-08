@@ -28,4 +28,9 @@ class Users_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function edit_user($id, $data){
+        $this->db->where('user_id', $id);
+        $this->db->update('users', $data);
+    }
 }

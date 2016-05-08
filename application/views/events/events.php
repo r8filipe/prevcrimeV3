@@ -1,6 +1,10 @@
 <?php
 //Obtain User language
-$idiom = 'portuguese';
+if(isset($_SESSION['language'])){
+    $idiom = $_SESSION['language'];
+}else {
+    $idiom = $this->config->item('language');
+}
 //Load of language file
 $this->lang->load('events_lang', $idiom);
 ?>
@@ -20,6 +24,7 @@ $this->lang->load('events_lang', $idiom);
                             <th><?php echo $this->lang->line('events_columnCategory'); ?></th>
                             <th><?php echo $this->lang->line('events_columnOccurence'); ?></th>
                             <th><?php echo $this->lang->line('events_columnLocal'); ?></th>
+                            <th hidden>obs</th>
                             <th><?php echo $this->lang->line('events_columnDateTime'); ?></th>
                             <th><?php echo $this->lang->line('events_columnOptions'); ?></th>
                         </tr>
@@ -31,6 +36,7 @@ $this->lang->load('events_lang', $idiom);
                             <td class="center">{category}</td>
                             <td class="center">{occurrence}</td>
                             <td class="center">{local_type_id}</td>
+                            <td class="center" hidden>{obs}</td>
                             <td class="center">{created_at}</td>
                             <td class="center">
                                 <a href="<?php echo base_url(); ?>events/details/{id}"><?php echo $this->lang->line('events_optionWatch'); ?></a>
