@@ -70,4 +70,7 @@ $route['webservice/image/(:num)'] = 'webservice/image/$1';
 
 $route['events/createevents'] = 'events/insert_event_porto';
 
+//Statistics routes
+$route['statistics'] = 'events/getstatistics';
+
 $route[LOGIN_PAGE] = 'auth/login';

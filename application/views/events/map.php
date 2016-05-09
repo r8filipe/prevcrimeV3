@@ -7,6 +7,10 @@ if(isset($_SESSION['language'])){
 }
 //Load of language file
 $this->lang->load('map_lang', $idiom);
+$this->config->load('prevcrimeconfig');
+$zoom = $this->config->item('zoom');
+$long = $this->config->item('long');
+$lat = $this->config->item('lat');
 ?>
 <div class="row">
     <div class="col-lg-12">
@@ -22,14 +26,14 @@ $this->lang->load('map_lang', $idiom);
                 <script>
                     var vectorSource = new ol.source.Vector({});
                     {events}
-                    console.log('{icon}');
                     var iconFeature = new ol.Feature({
                         geometry: new ol.geom.Point(ol.proj.transform([{long}, {lat}], 'EPSG:4326',
                             'EPSG:3857')),
-                        name: "{address}",
+                        name: "{occurrence}" + "</br><a href='<?php echo base_url(); ?>events/details/{id}' target='_blank'>Ver detalhes</a>",
                         population: 4000,
                         rainfall: 500
                     });
+
                     var iconStyle = new ol.style.Style({
                         image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
                             anchor: [0.5, 0.75],
@@ -40,6 +44,7 @@ $this->lang->load('map_lang', $idiom);
                     });
                     iconFeature.setStyle(iconStyle);
                     vectorSource.addFeature(iconFeature);
+
                     {/events}
                     var vectorLayer = new ol.layer.Vector({
                         source: vectorSource,
@@ -56,8 +61,8 @@ $this->lang->load('map_lang', $idiom);
                         layers: [rasterLayer, vectorLayer],
                         target: document.getElementById('map'),
                         view: new ol.View({
-                            center: ol.proj.transform([-8.6191053, 41.1579438], 'EPSG:4326', 'EPSG:3857'),
-                            zoom: 14,
+                            center: ol.proj.transform([<?php echo $long; ?>, <?php echo $lat; ?>], 'EPSG:4326', 'EPSG:3857'),
+                            zoom: <?php echo $zoom; ?>,
                             minZoom: 13
                         }),
 
@@ -79,6 +84,7 @@ $this->lang->load('map_lang', $idiom);
                         positioning: 'bottom-center',
                         stopEvent: false
                     });
+                    popup.setOffset([0, -25]);
                     map.addOverlay(popup);
 
                     // display popup on click
@@ -91,12 +97,10 @@ $this->lang->load('map_lang', $idiom);
                             var geometry = feature.getGeometry();
                             var coord = geometry.getCoordinates();
                             popup.setPosition(coord);
-                            $(element).popover({
-                                'placement': 'top',
-                                'html': true,
-                                'content': feature.get('name')
-                            });
-                            $(element).popover('show');//nem sei se isto dos popups tem a ver com OL3
+                            $(element).attr('data-placement', 'top');
+                            $(element).attr('data-html', true);
+                            $(element).attr('data-content', feature.get('name'));
+                            $(element).popover('show');
                         } else {
                             $(element).popover('destroy');
                         }

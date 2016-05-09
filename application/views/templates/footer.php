@@ -8,6 +8,7 @@
 <script src="<?php echo base_url(); ?>dist/metisMenu/dist/metisMenu.min.js"></script>
 
 <!-- DataTables JavaScript -->
+
 <script src="<?php echo base_url(); ?>dist/datatables/media/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>dist/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/js/dataTables.fixedHeader.min.js"></script>
@@ -31,6 +32,10 @@
         $('#end_date').keyup( function() { events_table.draw(); } );
     });
 </script>
+
+<!-- Charts -->
+<script src="<?php echo base_url(); ?>dist/flot/jquery.flot.js"></script>
+<script src="<?php echo base_url(); ?>dist/flot/jquery.flot.pie.min.js"></script>
 
 </body>
 
