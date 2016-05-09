@@ -53,6 +53,8 @@ $this->lang->load('master_lang', $idiom);
     <script src="<?php echo base_url(); ?>dist/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- OpenLayers 3 JavaScript -->
     <script src="<?php echo base_url(); ?>dist/ol/ol.js"></script>
+
+
 </head>
 
 <body>
@@ -184,6 +186,10 @@ $this->lang->load('master_lang', $idiom);
                     <li>
                         <a href="<?php echo base_url(); ?>events/map"><i
                                 class="fa fa-globe"></i><?php echo $this->lang->line('master_menuMap'); ?></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>statistics"><i
+                                class="fa fa-globe"></i><?php echo $this->lang->line('master_menuStatistics'); ?></a>
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>users"><i

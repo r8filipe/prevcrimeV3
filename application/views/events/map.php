@@ -3,6 +3,7 @@
 $idiom = 'french';
 //Load of language file
 $this->lang->load('map_lang', $idiom);
+$this->config->load('prevcrimeconfig');
 $zoom = $this->config->item('zoom');
 $long = $this->config->item('long');
 $lat = $this->config->item('lat');

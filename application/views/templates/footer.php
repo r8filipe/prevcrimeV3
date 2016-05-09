@@ -26,6 +26,10 @@
     } );
 </script>
 
+<!-- Charts -->
+<script src="<?php echo base_url(); ?>dist/flot/jquery.flot.js"></script>
+<script src="<?php echo base_url(); ?>dist/flot/jquery.flot.pie.min.js"></script>
+
 </body>
 
 </html>

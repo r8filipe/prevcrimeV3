@@ -510,14 +510,3 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
-
-/*
-|--------------------------------------------------------------------------
-| Basics Configurations of the App
-|--------------------------------------------------------------------------
-|
-| zoom: Zoom of the map when opened
-*/
-$config['zoom'] = 16;
-$config['long'] = -8.6105811;
-$config['lat'] = 41.1741937;

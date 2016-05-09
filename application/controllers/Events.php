@@ -15,6 +15,7 @@ class Events extends My_Controller
         $idiom = 'portuguese';
         $this->lang->load('map_lang', $idiom);
         $this->lang->load('events_lang', $idiom);
+        $this->lang->load('statistics_lang', $idiom);
     }
 
     public function index()
@@ -93,4 +94,25 @@ class Events extends My_Controller
             $this->load->view('auth/login');
         }
     }
+
+    public function getstatistics()
+    {
+        $this->load->library('parser');
+        $this->load->helper('url');
+
+        $this->is_logged_in();
+
+        if (!empty($this->auth_role)) {
+            $data['events'] = $this->events_model->get_events();
+            $data['title'] = $this->lang->line('stat_containerTitle');
+
+            $this->parser->parse('templates/header', $data);
+            $this->parser->parse('statistics/statistics', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->setup_login_form();
+            $this->load->view('auth/login');
+        }
+    }
+
 }
