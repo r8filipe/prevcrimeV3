@@ -25,6 +25,15 @@ class Events extends My_Controller
         $this->is_logged_in();
 
         if (!empty($this->auth_role)) {
+            var_dump($_POST['begin_date']);
+            var_dump($_SESSION);
+            if(isset($_POST['begin_date']) && isset($_POST['end_date'])){
+                $filters = array('date_range' => array( 'begin' => $_POST['begin_date'],
+                                                        'end'   => $_POST['end_date']
+                                                      )
+                                );
+                $this->session->set_userdata('events_filters', $filters);
+            }
             $data['events'] = $this->events_model->get_events();
             $data['title'] = $this->lang->line('events_title');
 

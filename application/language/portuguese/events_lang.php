@@ -37,4 +37,10 @@ $lang = array(
 
     'events_optionEdit'          => 'Editar',
 
+    'events_beginDate'           => 'Data de início',
+
+    'events_endDate'             => 'Data de fim',
+
+    'events_submitBtn'           => 'Submeter',
+
 );
