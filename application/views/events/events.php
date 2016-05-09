@@ -1,6 +1,10 @@
 <?php
 //Obtain User language
-$idiom = 'portuguese';
+if(isset($_SESSION['language'])){
+    $idiom = $_SESSION['language'];
+}else {
+    $idiom = $this->config->item('language');
+}
 //Load of language file
 $this->lang->load('events_lang', $idiom);
 ?>
@@ -12,34 +16,56 @@ $this->lang->load('events_lang', $idiom);
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <div class="dataTable_wrapper">
+                <!--<div class="dataTable_wrapper">-->
+                    <form role="form" method="post" action="<?php echo base_url()."events" ;?>">
+                        <div class="form-group">
+                            <label><?php echo $this->lang->line('events_beginDate'); ?></label>
+                            <input class="form-control" type="text" id="begin_date">
+                        </div>
+                        <div class="form-group">
+                            <label><?php echo $this->lang->line('events_endDate'); ?></label>
+                            <input class="form-control" type="text" id="end_date">
+                        </div>
+                        <button type="submit" class="btn btn-default"><?php echo $this->lang->line('events_submitBtn'); ?></button>
+                    </form>
                     <table class="table table-striped table-bordered table-hover" id="dataTables-event">
                         <thead>
                         <tr>
-                            <th><?php echo $this->lang->line('events_columnId'); ?></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>pesquisa de datas</th>
+                            <th></th>
+                        </tr>
+                        <tr>
                             <th><?php echo $this->lang->line('events_columnAddress'); ?></th>
                             <th><?php echo $this->lang->line('events_columnCategory'); ?></th>
                             <th><?php echo $this->lang->line('events_columnOccurrence'); ?></th>
                             <th><?php echo $this->lang->line('events_columnLocal'); ?></th>
+                            <th hidden>obs</th>
                             <th><?php echo $this->lang->line('events_columnDateTime'); ?></th>
                             <th><?php echo $this->lang->line('events_columnOptions'); ?></th>
                         </tr>
                         </thead>
                         <tbody>
                         {events}
-                        <tr class="gradeU">
-                            <td>{id}</td>
+                        <tr>
                             <td>{address}</td>
                             <td class="center">{category}</td>
                             <td class="center">{occurrence}</td>
                             <td class="center">{local_type_id}</td>
+                            <td class="center" hidden>{obs}</td>
                             <td class="center">{created_at}</td>
-                            <td class="center"> <a href="<?php echo base_url(); ?>events/details/{id}">Ver</a></td>
+                            <td class="center">
+                                <a href="<?php echo base_url(); ?>events/details/{id}"><?php echo $this->lang->line('events_optionWatch'); ?></a>
+                                <a href="<?php echo base_url(); ?>events/details/{id}"><?php echo $this->lang->line('events_optionEdit'); ?></a>
+                            </td>
                         </tr>
                        {/events}
                         </tbody>
                     </table>
-                </div>
+                <!--</div>-->
                 <!-- /.table-responsive -->
 
             </div>

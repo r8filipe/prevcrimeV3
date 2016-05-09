@@ -9,4 +9,6 @@ $lang = array(
 
     'map_containerTitle' => 'Map',
 
+    'map_Title' => 'Map',
+
 );

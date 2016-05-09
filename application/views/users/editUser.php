@@ -6,7 +6,11 @@
  * Time: 01:13
  */
 //Obtain User language
-$idiom = 'portuguese';
+if(isset($_SESSION['language'])){
+    $idiom = $_SESSION['language'];
+}else {
+    $idiom = $this->config->item('language');
+}
 //Load of language file
 $this->lang->load('editUser_lang', $idiom);
 ?>

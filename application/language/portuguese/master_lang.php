@@ -13,7 +13,7 @@ $lang = array(
 
     'master_search'          => 'Pesquisar',
 
-    'master_menuOccurrences' => 'Ocurrências',
+    'master_menuOccurrences' => 'Ocorrências',
 
     'master_menuMap'         => 'Mapa',
 

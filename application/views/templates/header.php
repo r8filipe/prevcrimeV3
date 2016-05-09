@@ -1,6 +1,10 @@
 <?php
 //Obtain User language
-$idiom = 'portuguese';
+if(isset($_SESSION['language'])){
+    $idiom = $_SESSION['language'];
+}else {
+    $idiom = $this->config->item('language');
+}
 //Load of language file
 $this->lang->load('master_lang', $idiom);
 ?>
@@ -28,11 +32,12 @@ $this->lang->load('master_lang', $idiom);
     <link href="<?php echo base_url(); ?>dist/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
-    <link href="<?php echo base_url(); ?>dist/datatables/media/css/dataTables.fixedHeader.css"
-          rel="stylesheet">
-
-    <link href="<?php echo base_url(); ?>dist/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
-          rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.dataTables.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.foundation.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.jqueryui.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="<?php echo base_url(); ?>dist/custom/css/sb-admin-2.css" rel="stylesheet">
@@ -76,7 +81,15 @@ $this->lang->load('master_lang', $idiom);
         <!-- /.navbar-header -->
 
         <ul class="nav navbar-top-links navbar-right">
-
+            <a href="<?php echo base_url(); ?>language_switch/switchLanguage/portuguese">
+                <img src="<?php echo base_url(); ?>dist/flags/Portugal.png" />
+            </a>
+            <a href="<?php echo base_url(); ?>language_switch/switchLanguage/english">
+                <img src="<?php echo base_url(); ?>dist/flags/England.png" />
+            </a>
+            <a href="<?php echo base_url(); ?>language_switch/switchLanguage/french">
+                <img src="<?php echo base_url(); ?>dist/flags/France.png" />
+            </a>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
