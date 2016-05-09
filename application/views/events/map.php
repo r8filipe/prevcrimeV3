@@ -1,8 +1,11 @@
 <?php
 //Obtain User language
-$idiom = 'portuguese';
+$idiom = 'french';
 //Load of language file
 $this->lang->load('map_lang', $idiom);
+$zoom = $this->config->item('zoom');
+$long = $this->config->item('long');
+$lat = $this->config->item('lat');
 ?>
 <div class="row">
     <div class="col-lg-12">
@@ -53,8 +56,8 @@ $this->lang->load('map_lang', $idiom);
                         layers: [rasterLayer, vectorLayer],
                         target: document.getElementById('map'),
                         view: new ol.View({
-                            center: ol.proj.transform([-8.6191053, 41.1579438], 'EPSG:4326', 'EPSG:3857'),
-                            zoom: 14,
+                            center: ol.proj.transform([<?php echo $long; ?>, <?php echo $lat; ?>], 'EPSG:4326', 'EPSG:3857'),
+                            zoom: <?php echo $zoom; ?>,
                             minZoom: 13
                         }),
 
