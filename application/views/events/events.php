@@ -16,9 +16,28 @@ $this->lang->load('events_lang', $idiom);
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <div class="dataTable_wrapper">
+                <!--<div class="dataTable_wrapper">-->
+                    <form role="form" method="post" action="<?php echo base_url()."events" ;?>">
+                        <div class="form-group">
+                            <label><?php echo $this->lang->line('events_beginDate'); ?></label>
+                            <input class="form-control" type="text" id="begin_date">
+                        </div>
+                        <div class="form-group">
+                            <label><?php echo $this->lang->line('events_endDate'); ?></label>
+                            <input class="form-control" type="text" id="end_date">
+                        </div>
+                        <button type="submit" class="btn btn-default"><?php echo $this->lang->line('events_submitBtn'); ?></button>
+                    </form>
                     <table class="table table-striped table-bordered table-hover" id="dataTables-event">
                         <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>pesquisa de datas</th>
+                            <th></th>
+                        </tr>
                         <tr>
                             <th><?php echo $this->lang->line('events_columnAddress'); ?></th>
                             <th><?php echo $this->lang->line('events_columnCategory'); ?></th>
@@ -31,7 +50,7 @@ $this->lang->load('events_lang', $idiom);
                         </thead>
                         <tbody>
                         {events}
-                        <tr class="gradeU">
+                        <tr>
                             <td>{address}</td>
                             <td class="center">{category}</td>
                             <td class="center">{occurrence}</td>
@@ -46,7 +65,7 @@ $this->lang->load('events_lang', $idiom);
                        {/events}
                         </tbody>
                     </table>
-                </div>
+                <!--</div>-->
                 <!-- /.table-responsive -->
 
             </div>

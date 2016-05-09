@@ -32,8 +32,12 @@ $this->lang->load('master_lang', $idiom);
     <link href="<?php echo base_url(); ?>dist/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
-    <link href="<?php echo base_url(); ?>dist/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
-          rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.dataTables.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.foundation.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.jqueryui.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="<?php echo base_url(); ?>dist/custom/css/sb-admin-2.css" rel="stylesheet">
@@ -76,13 +80,13 @@ $this->lang->load('master_lang', $idiom);
 
         <ul class="nav navbar-top-links navbar-right">
             <a href="<?php echo base_url(); ?>language_switch/switchLanguage/portuguese">
-                <img src="./dist/flags/Portugal.png" />
+                <img src="<?php echo base_url(); ?>dist/flags/Portugal.png" />
             </a>
             <a href="<?php echo base_url(); ?>language_switch/switchLanguage/english">
-                <img src="./dist/flags/England.png" />
+                <img src="<?php echo base_url(); ?>dist/flags/England.png" />
             </a>
             <a href="<?php echo base_url(); ?>language_switch/switchLanguage/french">
-                <img src="./dist/flags/France.png" />
+                <img src="<?php echo base_url(); ?>dist/flags/France.png" />
             </a>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">

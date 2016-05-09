@@ -25,7 +25,7 @@ $lang = array(
 
     'events_columnCategory'      => 'Category',
 
-    'events_columnOccurrence'     => 'Occurrence',
+    'events_columnOccurrence'    => 'Occurrence',
 
     'events_columnLocal'         => 'Local',
 
@@ -35,6 +35,12 @@ $lang = array(
 
     'events_optionWatch'         => 'Details',
 
-    'events_optionEdit'         => 'Edit',
+    'events_optionEdit'          => 'Edit',
+
+    'events_beginDate'           => 'Begin Date',
+
+    'events_endDate'             => 'End Date',
+
+    'events_submitBtn'           => 'Submit',
 
 );

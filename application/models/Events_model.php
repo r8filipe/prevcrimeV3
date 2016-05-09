@@ -14,6 +14,17 @@ class Events_model extends CI_Model
         $this->db->from('events');
         $this->db->join('sub_categories', 'sub_categories.id = events.sub_category_id');
         $this->db->join('categories', 'categories.id = sub_categories.category_id');
+        //Verifies if there are filters to apply to the events table 
+        if(isset($_SESSION['events_filters'])){
+            $filters = $_SESSION['events_filters'];
+            //Verifies if there are date filters to apply to the events table 
+            if(isset($filters['date_range'])){
+                $range = $filters['date_range'];
+                $this->db->where('date BETWEEN "'. date('yyyy-mm-dd', strtotime($range['begin'])). '" and "'. date('yyyy-mm-dd', strtotime($range['end'])).'"');
+            }
+            //Apply more filters here...
+            
+        }
         if ($slug === FALSE) {
             $query = $this->db->get();
             return $query->result_array();
