@@ -7,11 +7,13 @@
  */
 $lang = array(
 
+    'details_title'              => 'Detalhes',
+
     'details_containerTitle'     => 'Dados',
 
     'details_address'            => 'Endereço',
 
-    'details_coordinates'        => 'Coordenadas (Latitude, Longitude)',
+    'details_coordinates'        => 'Coordenadas (Lat., Long.)',
 
     'details_category'           => 'Categoria',
 

@@ -13,11 +13,23 @@
 <script src="<?php echo base_url(); ?>dist/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/js/dataTables.fixedHeader.min.js"></script>
 <script src="<?php echo base_url(); ?>dist/datatables-plugins/filtering/row-based/js/range_dates.js"></script>
+
 <!-- Custom Theme JavaScript -->
 <script src="<?php echo base_url(); ?>dist/custom/js/sb-admin-2.js"></script>
 
+<!-- Bootstrap-datepicker 1.6 -->
+<script src="<?php echo base_url(); ?>dist/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="<?php echo base_url(); ?>dist/bootstrap-datepicker/locales/bootstrap-datepicker.pt.min.js" charset="UTF-8"></script>
+<script src="<?php echo base_url(); ?>dist/bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.min.js" charset="UTF-8"></script>
+<script src="<?php echo base_url(); ?>dist/bootstrap-datepicker/locales/bootstrap-datepicker.fr.min.js" charset="UTF-8"></script>
+
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
+    $('#datepicker input').datepicker({
+        format: "yyyy-mm-dd",
+        language: '<?php echo ($dimL = (isset($_SESSION['language'])?$_SESSION['language']:$this->config->item('language')))=='portuguese'?'pt':($dimL=='english'?'en-GB':'fr'); ?>'
+    });
+
     $(document).ready(function () {
         var events_table = $('#dataTables-event').DataTable({
             responsive: true,
@@ -36,7 +48,7 @@
 <!-- Charts -->
 <script src="<?php echo base_url(); ?>dist/flot/jquery.flot.js"></script>
 <script src="<?php echo base_url(); ?>dist/flot/jquery.flot.pie.min.js"></script>
-
+<?php echo ($dimL = (isset($_SESSION['language'])?$_SESSION['language']:$this->config->item('language')))=='portuguese'?'pt':($dimL=='english'?'en-GB':'fr'); ?>
 </body>
 
 </html>

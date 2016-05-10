@@ -25,7 +25,7 @@ $lang = array(
 
     'events_columnCategory'      => 'Category',
 
-    'events_columnOccurrence'     => 'Occurrence',
+    'events_columnOccurrence'    => 'Occurrence',
 
     'events_columnLocal'         => 'Local',
 

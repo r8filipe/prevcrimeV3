@@ -7,27 +7,29 @@
  */
 $lang = array(
 
-    'details_containerTitle' => 'Intel',
+    'details_title'           => 'Details',
+    
+    'details_containerTitle'  => 'Intel',
 
-    'details_address' => 'Address',
+    'details_address'         => 'Address',
 
-    'details_coordinates' => 'Coordinates (Latitude, Longitude)',
+    'details_coordinates'     => 'Coordinates (Lat., Long.)',
 
-    'details_category' => 'Category',
+    'details_category'        => 'Category',
 
-    'details_subCategory' => 'Sub Category',
+    'details_subCategory'     => 'Sub Category',
 
-    'details_registerBy' => 'Register By',
+    'details_registerBy'      => 'Register By',
 
-    'details_createdAt' => 'Created At',
+    'details_createdAt'       => 'Created At',
 
-    'details_containerObs'       => 'Observations',
+    'details_containerObs'    => 'Observations',
 
-    'details_submitBtn'          => 'Submit',
+    'details_submitBtn'       => 'Submit',
 
-    'details_containerPhotos'    => 'Photos',
+    'details_containerPhotos' => 'Photos',
 
-    'details_map' => 'Map',
+    'details_map'             => 'Map',
 
     'details_graphicOfStatistic' => 'Graphic of a Statistic',
 

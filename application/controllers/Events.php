@@ -12,10 +12,6 @@ class Events extends My_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->helper('html');
-        $idiom = 'portuguese';
-        $this->lang->load('map_lang', $idiom);
-        $this->lang->load('events_lang', $idiom);
-        $this->lang->load('statistics_lang', $idiom);
     }
 
     public function index()
@@ -34,8 +30,6 @@ class Events extends My_Controller
                 $this->session->set_userdata('events_filters', $filters);
             }
             $data['events'] = $this->events_model->get_events();
-            $data['title'] = $this->lang->line('events_title');
-
 
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('events/events', $data);
@@ -56,7 +50,6 @@ class Events extends My_Controller
 
         if (!empty($this->auth_role)) {
             $data['events'] = $this->events_model->get_events();
-            $data['title'] = $this->lang->line('map_containerTitle');
 
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('events/map', $data);
@@ -91,7 +84,6 @@ class Events extends My_Controller
 
         if (!empty($this->auth_role)) {
             $data['event'] = $this->events_model->get_events($event);
-            $data['title'] = $this->lang->line('events_title') . ' ' . $event;
             $data['photos'] = $this->photos_model->getPhotos($event);
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('events/details', $data);
@@ -145,7 +137,6 @@ class Events extends My_Controller
 
         if (!empty($this->auth_role)) {
             $data['events'] = $this->events_model->get_events();
-            $data['title'] = $this->lang->line('stat_containerTitle');
 
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('statistics/statistics', $data);

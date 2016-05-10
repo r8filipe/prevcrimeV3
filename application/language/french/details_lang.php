@@ -7,27 +7,29 @@
  */
 $lang = array(
 
-    'details_containerTitle' => 'Données',
+    'details_title'           => 'Détails',
 
-    'details_address' => 'Adresse',
+    'details_containerTitle'  => 'Données',
 
-    'details_coordinates' => 'Coordonnées (Latitude, Longitude)',
+    'details_address'         => 'Adresse',
 
-    'details_category' => 'Catégorie',
+    'details_coordinates'     => 'Coordonnées (Lat., Long.)',
 
-    'details_subCategory' => 'Sous-catégorie',
+    'details_category'        => 'Catégorie',
 
-    'details_registerBy' => 'Rejoints par',
+    'details_subCategory'     => 'Sous-catégorie',
 
-    'details_createdAt' => 'Créé le',
+    'details_registerBy'      => 'Rejoints par',
 
-    'details_containerObs' => 'Remarques',
+    'details_createdAt'       => 'Créé le',
 
-    'details_submitBtn' => 'Envoyer',
+    'details_containerObs'    => 'Remarques',
+
+    'details_submitBtn'       => 'Envoyer',
 
     'details_containerPhotos' => 'Photos',
 
-    'details_map' => 'Carte',
+    'details_map'             => 'Carte',
 
     'details_graphicOfStatistic' => 'Graphique d\'une statistique',
 
