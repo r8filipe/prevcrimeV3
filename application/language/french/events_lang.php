@@ -37,4 +37,6 @@ $lang = array(
 
     'events_optionEdit'          =>  'Éditer',
 
+    'events_statistics'          => 'Statistiques'
+
 );

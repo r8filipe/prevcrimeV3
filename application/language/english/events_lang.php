@@ -43,4 +43,6 @@ $lang = array(
 
     'events_submitBtn'           => 'Submit',
 
+    'events_statistics'          => 'Statistics'
+
 );

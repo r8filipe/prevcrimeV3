@@ -46,6 +46,7 @@
 </script>
 
 <!-- Charts -->
+
 <script src="<?php echo base_url(); ?>dist/flot/jquery.flot.js"></script>
 <script src="<?php echo base_url(); ?>dist/flot/jquery.flot.pie.min.js"></script>
 <?php echo ($dimL = (isset($_SESSION['language'])?$_SESSION['language']:$this->config->item('language')))=='portuguese'?'pt':($dimL=='english'?'en-GB':'fr'); ?>
