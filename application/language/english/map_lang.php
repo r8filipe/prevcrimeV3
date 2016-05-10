@@ -9,6 +9,6 @@ $lang = array(
 
     'map_containerTitle' => 'Map',
 
-    'map_Title' => 'Map',
+    'map_title'          => 'Map',
 
 );

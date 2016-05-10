@@ -23,7 +23,6 @@ class Users extends My_Controller{
 
         if (!empty($this->auth_role)) {
             $data['users'] = $this->users_model->get_users();
-            $data['title'] = 'Users archive';
 
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('users/users', $data);
@@ -40,7 +39,6 @@ class Users extends My_Controller{
         $this->is_logged_in();
         if (!empty($this->auth_role)) {
             $data['user'] = $this->users_model->get_users($user);
-            $data['title'] = 'User '.$user['id'];
 
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('users/details', $data);
@@ -56,7 +54,6 @@ class Users extends My_Controller{
         $this->load->helper('url');
         $this->is_logged_in();
         if (!empty($this->auth_role)) {
-            $data['title'] = 'Create User';
 
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('users/createUser', $data);

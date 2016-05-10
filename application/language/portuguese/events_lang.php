@@ -35,7 +35,7 @@ $lang = array(
 
     'events_optionWatch'         => 'Ver',
 
-    'events_optionEdit'         => 'Editar',
+    'events_optionEdit'          => 'Editar',
 
     'events_beginDate'           => 'Data de início',
 

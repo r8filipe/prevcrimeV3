@@ -7,6 +7,8 @@
  */
 $lang = array(
 
+    'createUser_title'          => 'Créer Utilisateur',
+
     'createUser_containerTitle' => 'Créer Utilisateur',
 
     'createUser_username'       => 'Nom d\'utilisateur',

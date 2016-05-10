@@ -45,6 +45,9 @@ $this->lang->load('master_lang', $idiom);
     <!-- Custom Fonts -->
     <link href="<?php echo base_url(); ?>dist/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- Bootstrap-datepicker 1.6 -->
+    <link id="bsdp-css" href="<?php echo base_url(); ?>dist/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -85,7 +88,7 @@ $this->lang->load('master_lang', $idiom);
                 <img src="<?php echo base_url(); ?>dist/flags/Portugal.png" />
             </a>
             <a href="<?php echo base_url(); ?>language_switch/switchLanguage/english">
-                <img src="<?php echo base_url(); ?>dist/flags/England.png" />
+                <img src="<?php echo base_url(); ?>dist/flags/United_Kingdom.png" />
             </a>
             <a href="<?php echo base_url(); ?>language_switch/switchLanguage/french">
                 <img src="<?php echo base_url(); ?>dist/flags/France.png" />

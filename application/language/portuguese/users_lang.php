@@ -7,22 +7,24 @@
  */
 $lang = array(
 
-    'users_containerTitle'   => 'Utilisateurs',
+    'users_title'            => 'Utilizadores',
+
+    'users_containerTitle'   => 'Utilizadores',
 
     'users_columnId'         => 'ID',
 
-    'users_columnUsername'   => 'Nom',
+    'users_columnUsername'   => 'Nome',
 
-    'users_columnEmail'      => 'Email',
+    'users_columnEmail'      => 'e-mail',
 
-    'users_columnAuthLevel'  => 'Níveu d\'aut.',
+    'users_columnAuthLevel'  => 'Nível aut.',
 
-    'users_columnBanned'     => 'Interdit?',
+    'users_columnBanned'     => 'Banido?',
 
-    'users_columnLastLogin'  => 'Dernière visite',
+    'users_columnLastLogin'  => 'Ultima visita',
 
-    'users_columnOptions'    => 'Options',
+    'users_columnOptions'    => 'Opções',
 
-    'users_optionWatch'      => 'Voir',
+    'users_optionWatch'      => 'Ver',
 
 );
