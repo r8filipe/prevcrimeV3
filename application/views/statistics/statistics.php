@@ -1,33 +1,59 @@
 <?php
 //Obtain User language
-$idiom = 'portuguese';
+if(isset($_SESSION['language'])){
+    $idiom = $_SESSION['language'];
+}else {
+    $idiom = $this->config->item('language');
+}
 //Load of language file
 $this->lang->load('statistics_lang', $idiom);
 ?>
 
 <script type="text/javascript">
-    var data = [
-        { label: "IE",  data: 19.5, color: "#4572A7"},
-        { label: "Safari",  data: 4.5, color: "#80699B"},
-        { label: "Firefox",  data: 36.6, color: "#AA4643"},
-        { label: "Opera",  data: 2.3, color: "#3D96AE"},
-        { label: "Chrome",  data: 36.3, color: "#89A54E"},
-        { label: "Other",  data: 0.8, color: "#3D96AE"}
-    ];
+    $(function() {
 
-    $(document).ready(function () {
-        $.plot($("#flot-pie-chart"), data, {
+        var data = [{
+            label: "Series 0",
+            data: 1
+        }, {
+            label: "Series 1",
+            data: 3
+        }, {
+            label: "Series 2",
+            data: 9
+        }, {
+            label: "Series 3",
+            data: 20
+        }];
+
+        var plotObj = $.plot($("#flot-pie-chart"), data, {
             series: {
                 pie: {
                     show: true
                 }
             },
-            legend: {
-                labelBoxBorderColor: "none"
+            grid: {
+                hoverable: true
+            },
+            tooltip: true,
+            tooltipOpts: {
+                content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+                shifts: {
+                    x: 20,
+                    y: 0
+                },
+                defaultTheme: false
             }
         });
+
     });
 </script>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><?php echo $this->lang->line('stat_Title'); ?></h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
 <div class="row">
     <div class="col-lg-6">
         <div class="panel panel-default">

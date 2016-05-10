@@ -15,6 +15,12 @@ if(isset($_SESSION['language'])){
 $this->lang->load('details_lang', $idiom);
 ?>
 <div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><?php echo $this->lang->line('details_title'); ?></h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
     <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
