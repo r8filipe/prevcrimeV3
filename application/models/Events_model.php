@@ -34,6 +34,17 @@ class Events_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+    public function get_events_by_categories()
+    {
+        $this->db->select('categories.category, count(*) as num');
+        $this->db->from('events');
+        $this->db->join('sub_categories', 'sub_categories.id = events.sub_category_id');
+        $this->db->join('categories', 'categories.id = sub_categories.category_id');
+        $this->db->group_by('categories.category');
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
     public function insert($data){
         $this->db->insert('events', $data);

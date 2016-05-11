@@ -12,19 +12,16 @@ $this->lang->load('statistics_lang', $idiom);
 <script type="text/javascript">
     $(function() {
 
-        var data = [{
-            label: "Series 0",
-            data: 1
-        }, {
-            label: "Series 1",
-            data: 3
-        }, {
-            label: "Series 2",
-            data: 9
-        }, {
-            label: "Series 3",
-            data: 20
-        }];
+        var data = [
+            <?php
+            foreach ($events as $event) {
+                echo "{";
+                echo 'label: "'.$event['category'].'",';
+                echo "data: ".$event['num'];
+                echo "},";
+            }
+            ?>
+        ];
 
         var plotObj = $.plot($("#flot-pie-chart"), data, {
             series: {
@@ -32,17 +29,8 @@ $this->lang->load('statistics_lang', $idiom);
                     show: true
                 }
             },
-            grid: {
-                hoverable: true
-            },
-            tooltip: true,
-            tooltipOpts: {
-                content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
-                shifts: {
-                    x: 20,
-                    y: 0
-                },
-                defaultTheme: false
+            legend: {
+                show: false
             }
         });
 
@@ -58,7 +46,7 @@ $this->lang->load('statistics_lang', $idiom);
     <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Gráfico Exemplo
+                <?php echo $this->lang->line('stat_Graph1'); ?>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
