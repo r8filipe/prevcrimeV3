@@ -136,12 +136,10 @@ class Events extends My_Controller
         $this->is_logged_in();
 
         if (!empty($this->auth_role)) {
-<<<<<<< HEAD
+
             $data['events'] = $this->events_model->get_events();
-=======
             $data['events'] = $this->events_model->get_events_by_categories();
             $data['title'] = $this->lang->line('stat_containerTitle');
->>>>>>> joel
 
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('statistics/statistics', $data);
