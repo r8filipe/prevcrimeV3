@@ -8,6 +8,9 @@
 $lang = array(
 
     'stat_containerTitle' => 'Estatísticas',
-    'stat_Title' => 'Estatísticas',
+
+    'stat_Title'          => 'Estatísticas',
+
+    'stat_Graph1'          => 'Número de Eventos por Categoria',
 
 );

@@ -21,4 +21,6 @@ $lang = array(
 
     'master_menuCreateUser'  => 'Créer utilisateur',
 
+    'master_menuStatistics'  => 'Statistiques',
+
 );

@@ -11,4 +11,5 @@ $lang = array(
 
     'stat_Title'          => 'Statistics',
 
+    'stat_Graph1'          => 'Number of Events by Category',
 );

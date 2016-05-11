@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login Form</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <title>Signin Template for Bootstrap</title>
 
-    <script src="<?php echo base_url(); ?>dist/js/prefixfree.min.js"></script>
-    <link href="<?php echo base_url(); ?>dist/custom/css/style.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="<?php echo base_url(); ?>dist/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="<?php echo base_url(); ?>dist/bootstrap/dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="<?php echo base_url(); ?>dist/custom/css/signin.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body>
@@ -40,45 +53,40 @@ if (!isset($on_hold_message)) {
 			</div>
 		';
     }
+    echo '<div class="row">';
 
-    echo form_open($login_url, array('class' => 'std-form'));
+
+
+
+
+    echo '</div>';
+    echo '<div class="container col-md-6 col-lg-offset-3">';
+    echo '<img src="'.base_url().'dist/images/opvc-icon.png" align="middle" class="img-responsive center-block">';
+    echo form_open($login_url, array('class' => 'form-signin'));
     ?>
+            <input name="login_string" id="login_string" class="form-control" placeholder="Email address" required="" autofocus="" type="text">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" name="login_pass" id="login_pass" class="form-control"
+               maxlength="<?php echo config_item('max_chars_for_password'); ?>" autocomplete="off"
+               readonly="readonly" placeholder="Password"
+               onfocus="this.removeAttribute('readonly');"
+            />
+            <div class="checkbox">
+                <label>
 
-    <div class="login-form">
-        <?php
-        if (!isset($optional_login)) {
-            echo '<h1 class="welcome">Login</h1>';
-        }
-        ?>
-        <div class="field">
-            <input type="text" placeholder="baylor@example.com" name="login_string" id="login_string" autocomplete="off"
-                   maxlength="255">
-        </div>
+                    <?php
+                    if (config_item('allow_remember_me')) {
+                        ?>
+                        <input value="yes" type="checkbox" id="remember_me" name="remember_me"> Remember me
+                        <?php
+                    }
+                    ?>
+                </label>
+            </div>
 
-        <div class="field with-btn">
-            <input type="password" name="login_pass" id="login_pass" class="form_input password"
-                   maxlength="<?php echo config_item('max_chars_for_password'); ?>" autocomplete="off"
-                   readonly="readonly"
-                   onfocus="this.removeAttribute('readonly');"/>
-        </div>
-
-        <?php
-        if (config_item('allow_remember_me')) {
-            ?>
-
-            <br/>
-
-            <label for="remember_me" class="form_label">Remember Me</label>
-            <input type="checkbox" id="remember_me" name="remember_me" value="yes"/>
-
-            <?php
-        }
-        ?>
-        <button>Login</button>
-
-
-    </div>
-    </form>
+            <button class="btn btn-lg btn-primary btn-block">Sign in</button>
+        </form>
+    </div> <!-- /container -->
 
     <?php
 
@@ -105,7 +113,8 @@ if (!isset($on_hold_message)) {
 }
 
 ?>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="<?php echo base_url(); ?>dist/custom/js/ie10-viewport-bug-workaround.js"></script>
 
 
 </body>
