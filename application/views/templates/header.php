@@ -38,6 +38,7 @@ $this->lang->load('master_lang', $idiom);
     <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.dataTables.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.foundation.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.jqueryui.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/Buttons/css/buttons.dataTables.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="<?php echo base_url(); ?>dist/custom/css/sb-admin-2.css" rel="stylesheet">
