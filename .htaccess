@@ -1,12 +1,13 @@
 <IfModule mod_rewrite.c>
 # Turn on URL rewriting
 RewriteEngine On
-
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token"
 # If your website begins from a folder e.g localhost/my_project then
 # you have to change it to: RewriteBase /my_project/
 # If your site begins from the root e.g. example.local/ then
 # let it as it is
-RewriteBase /prevcrime/
+RewriteBase /prevcrimeV3/
 
 # Protect application and system files from being viewed when the index.php is missing
 RewriteCond $1 ^(application|system|private|logs)

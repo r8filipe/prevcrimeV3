@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Community Auth - Form Tokens Library - V1.0.2
- * 
+ *
  * Community Auth is an open source authentication application for CodeIgniter 3
  *
  * @package     Community Auth
@@ -12,335 +12,315 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @license     BSD - http://www.opensource.org/licenses/BSD-3-Clause
  * @link        http://community-auth.com
  */
-
 class tokens
 {
-	/**
-	 * The name attribute of the form's token element
-	 *
-	 * @var string
-	 * @access public
-	 */
-	public $name;
+    /**
+     * The name attribute of the form's token element
+     *
+     * @var string
+     * @access public
+     */
+    public $name;
 
-	/**
-	 * The value of the last generated token
-	 *
-	 * @var mixed
-	 * @access public
-	 */
-	public $token = FALSE;
+    /**
+     * The value of the last generated token
+     *
+     * @var mixed
+     * @access public
+     */
+    public $token = FALSE;
 
-	/**
-	 * The value of the posted token
-	 *
-	 * @var mixed
-	 * @access public
-	 */
-	public $posted_value = FALSE;
+    /**
+     * The value of the posted token
+     *
+     * @var mixed
+     * @access public
+     */
+    public $posted_value = FALSE;
 
-	/**
-	 * An array of valid tokens
-	 *
-	 * @var array
-	 * @access public
-	 */
-	public $jar = array();
+    /**
+     * An array of valid tokens
+     *
+     * @var array
+     * @access public
+     */
+    public $jar = array();
 
-	/**
-	 * Whether or not the posted token matches one in the jar
-	 *
-	 * @var bool
-	 * @access public
-	 */
-	public $match = FALSE;
+    /**
+     * Whether or not the posted token matches one in the jar
+     *
+     * @var bool
+     * @access public
+     */
+    public $match = FALSE;
 
-	/**
-	 * The CodeIgniter super object
-	 *
-	 * @var object
-	 * @access private
-	 */
-	private $CI;
+    /**
+     * The CodeIgniter super object
+     *
+     * @var object
+     * @access private
+     */
+    private $CI;
 
-	/**
-	 * The current scheme / protocol
-	 *
-	 * @var string
-	 * @access private
-	 */
-	private $scheme = 'http';
+    /**
+     * The current scheme / protocol
+     *
+     * @var string
+     * @access private
+     */
+    private $scheme = 'http';
 
-	/**
-	 * Whether or not allow CI debug level 
-	 * logging for the token jar.
-	 *
-	 * @var bool
-	 * @access public
-	 */
-	private $debug = FALSE;
+    /**
+     * Whether or not allow CI debug level
+     * logging for the token jar.
+     *
+     * @var bool
+     * @access public
+     */
+    private $debug = FALSE;
 
-	/**
-	 * Whether or not to encrypt the tokens.
-	 * This may be useful for debugging, but
-	 * SHOULD ALWAYS BE LEFT SET TO TRUE FOR 
-	 * THE PRODUCTION WEBSITE!
-	 *
-	 * @var bool
-	 * @access private
-	 */
-	private $encrypted_tokens = TRUE;
+    /**
+     * Whether or not to encrypt the tokens.
+     * This may be useful for debugging, but
+     * SHOULD ALWAYS BE LEFT SET TO TRUE FOR
+     * THE PRODUCTION WEBSITE!
+     *
+     * @var bool
+     * @access private
+     */
+    private $encrypted_tokens = TRUE;
 
-	/**
-	 * Class constructor
-	 */
-	public function __construct()
-	{
-		if( is_https() )
-		{
-			// Set the current scheme / protocol
-			$this->scheme = 'https';
-		}
+    /**
+     * Class constructor
+     */
+    public function __construct()
+    {
+        if (is_https()) {
+            // Set the current scheme / protocol
+            $this->scheme = 'https';
+        }
 
-		$this->CI =& get_instance();
-		$this->CI->load->library('encryption');
+        $this->CI =& get_instance();
+        $this->CI->load->library('encryption');
 
-		// Set existing tokens in jar
-		$this->_set_jar();
+        // Set existing tokens in jar
+        $this->_set_jar();
 
-		// Check the default token name for match
-		$this->token_check();
-	}
+        // Check the default token name for match
+        $this->token_check();
+    }
 
-	// --------------------------------------------------------------
+    // --------------------------------------------------------------
 
-	/**
-	 * Check the token status with a provided token name, or "token" by default
-	 */
-	public function token_check( $rename = '', $dump_jar_on_match = FALSE )
-	{
-		// If rename provided, check that token name
-		$this->name = ( $rename == '' ) ? config_item('token_name') : $rename;
-			
-		// If no token jar contents, no reason to proceed
-		if( ! empty( $this->jar ) )
-		{
-			// Set the posted_value variable
-			if( $this->posted_value = $this->CI->input->post( $this->name ) )
-			{
-				// If the posted value matches one in the jar
-				if( in_array( $this->posted_value, $this->jar ) )
-				{
-					// Successful token match !
-					$this->match = TRUE;
+    /**
+     * Check the token status with a provided token name, or "token" by default
+     */
+    public function token_check($rename = '', $dump_jar_on_match = FALSE)
+    {
+        // If rename provided, check that token name
+        $this->name = ($rename == '') ? config_item('token_name') : $rename;
 
-					// Dump all tokens ?
-					if( $dump_jar_on_match )
-					{
-						$this->jar = array();
+        // If no token jar contents, no reason to proceed
+        if (!empty($this->jar)) {
+            // Set the posted_value variable
+            if ($this->posted_value = $this->CI->input->post($this->name)) {
+                // If the posted value matches one in the jar
+                if (in_array($this->posted_value, $this->jar)) {
+                    // Successful token match !
+                    $this->match = TRUE;
 
-						$this->save_tokens_cookie();
-					}
+                    // Dump all tokens ?
+                    if ($dump_jar_on_match) {
+                        $this->jar = array();
 
-					// Just delete the matching token
-					else
-					{
-						// What token jar key was the matching token ?
-						$matching_key = array_search( $this->posted_value, $this->jar );
+                        $this->save_tokens_cookie();
+                    } // Just delete the matching token
+                    else {
+                        // What token jar key was the matching token ?
+                        $matching_key = array_search($this->posted_value, $this->jar);
 
-						// Remove the matching token from the jar
-						unset( $this->jar[ $matching_key ] );
+                        // Remove the matching token from the jar
+                        unset($this->jar[$matching_key]);
 
-						// Auto generate a new token
-						$this->generate_form_token();
-					}
+                        // Auto generate a new token
+                        $this->generate_form_token();
+                    }
 
-					if( $this->debug )
-					{
-						log_message( 'debug', count( $this->jar ) . '@token_check' );
-						log_message( 'debug', json_encode( $this->jar ) );
-					}
+                    if ($this->debug) {
+                        log_message('debug', count($this->jar) . '@token_check');
+                        log_message('debug', json_encode($this->jar));
+                    }
 
-					return TRUE;
-				}
-			}
-		}
+                    return TRUE;
+                }
+            }
+        }
 
-		return FALSE;
-	}
-	
-	// -----------------------------------------------------------------------
+        return FALSE;
+    }
 
-	/**
-	 * Generate a form token. (a "singleton" type method)
-	 */
-	public function generate_form_token()
-	{
-		if( ! $this->token )
-		{
-			// Create a unique token
-			$this->token = substr(md5(uniqid() . microtime() . rand()), 0, 8);
+    // -----------------------------------------------------------------------
 
-			// Add the new token to the token jar array
-			$this->jar[] = $this->token;
+    /**
+     * Generate a form token. (a "singleton" type method)
+     */
+    public function generate_form_token()
+    {
+        if (!$this->token) {
+            // Create a unique token
+            $this->token = substr(md5(uniqid() . microtime() . rand()), 0, 8);
 
-			// The token jar can only hold so many tokens
-			while( count( $this->jar ) > config_item('token_jar_size') )
-			{
-				array_shift( $this->jar );
-			}
+            // Add the new token to the token jar array
+            $this->jar[] = $this->token;
 
-			if( $this->debug )
-			{
-				log_message( 'debug', count( $this->jar ) . '@generate_form_token' );
-				log_message( 'debug', json_encode( $this->jar ) );
-			}
+            // The token jar can only hold so many tokens
+            while (count($this->jar) > config_item('token_jar_size')) {
+                array_shift($this->jar);
+            }
 
-			$this->save_tokens_cookie();
-		}
+            if ($this->debug) {
+                log_message('debug', count($this->jar) . '@generate_form_token');
+                log_message('debug', json_encode($this->jar));
+            }
 
-		return $this->token;
-	}
+            $this->save_tokens_cookie();
+        }
 
-	// --------------------------------------------------------------------
+        return $this->token;
+    }
 
-	/**
-	 * Alias for generate_form_token method (because it's shorter to type).
-	 * Anytime we have a need to use a form token, simply call this function to 
-	 * set a token and retreive the value for placement in the form.
-	 */
-	public function token()
-	{
-		return $this->generate_form_token();
-	}
-	
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Save the token cookie
-	 */
-	public function save_tokens_cookie()
-	{
-		$token_cookie_name = ( $this->scheme == 'http' )
-			? config_item('http_tokens_cookie')
-			: config_item('https_tokens_cookie');
+    /**
+     * Alias for generate_form_token method (because it's shorter to type).
+     * Anytime we have a need to use a form token, simply call this function to
+     * set a token and retreive the value for placement in the form.
+     */
+    public function token()
+    {
+        return $this->generate_form_token();
+    }
 
-		$cookie_secure = ( $this->scheme == 'http' ) ? FALSE : TRUE;
+    // --------------------------------------------------------------------
 
-		if( $this->debug )
-		{
-			log_message( 'debug', count( $this->jar ) . '@save_tokens_cookie' );
-			log_message( 'debug', json_encode( $this->jar ) );
-		}
+    /**
+     * Save the token cookie
+     */
+    public function save_tokens_cookie()
+    {
+        $token_cookie_name = ($this->scheme == 'http')
+            ? config_item('http_tokens_cookie')
+            : config_item('https_tokens_cookie');
 
-		setcookie(
-			$token_cookie_name,
-			$this->pack_tokens(),
-			0,
-			config_item('cookie_path'),
-			config_item('cookie_domain'),
-			$cookie_secure
-		);
-	}
-	
-	// -----------------------------------------------------------------------
+        $cookie_secure = ($this->scheme == 'http') ? FALSE : TRUE;
 
-	/**
-	 * Fill the token jar with available tokens from cookie
-	 */
-	protected function _set_jar()
-	{
-		$token_cookie_name = $this->scheme == 'http' 
-			? config_item('http_tokens_cookie') 
-			: config_item('https_tokens_cookie');
+        if ($this->debug) {
+            log_message('debug', count($this->jar) . '@save_tokens_cookie');
+            log_message('debug', json_encode($this->jar));
+        }
 
-		/**
-		 * If we read in the tokens more than once, it will override
-		 * changes that may have been made, such as deleting a token.
-		 */
-		if( empty( $this->jar ) )
-		{
-			$this->jar = ( isset( $_COOKIE[ $token_cookie_name ] ) ) 
-				? $this->unpack_tokens( $token_cookie_name )
-				: array();
-		}
+        setcookie(
+            $token_cookie_name,
+            $this->pack_tokens(),
+            0,
+            config_item('cookie_path'),
+            config_item('cookie_domain'),
+            $cookie_secure
+        );
+    }
 
-		if( $this->debug )
-		{
-			log_message( 'debug', count( $this->jar ) . '@_set_jar' );
-			log_message( 'debug', json_encode( $this->jar ) );
-		}
+    // -----------------------------------------------------------------------
 
-		return $this->jar;
-	}
-	
-	// -----------------------------------------------------------------------
+    /**
+     * Fill the token jar with available tokens from cookie
+     */
+    protected function _set_jar()
+    {
+        $token_cookie_name = $this->scheme == 'http'
+            ? config_item('http_tokens_cookie')
+            : config_item('https_tokens_cookie');
 
-	/**
-	 * Unpack the tokens
-	 */
-	protected function unpack_tokens( $token_cookie_name )
-	{
-		$tokens = $_COOKIE[ $token_cookie_name ];
+        /**
+         * If we read in the tokens more than once, it will override
+         * changes that may have been made, such as deleting a token.
+         */
+        if (empty($this->jar)) {
+            $this->jar = (isset($_COOKIE[$token_cookie_name]))
+                ? $this->unpack_tokens($token_cookie_name)
+                : array();
+        }
 
-		if( $this->encrypted_tokens )
-		{
-			// Save the current encryption class settings
-			$this->CI->encryption->save_settings();
+        if ($this->debug) {
+            log_message('debug', count($this->jar) . '@_set_jar');
+            log_message('debug', json_encode($this->jar));
+        }
 
-			// Use default encryption settings
-			$this->CI->encryption->use_defaults();
+        return $this->jar;
+    }
 
-			// Decode the tokens
-			$tokens = $this->CI->encryption->decrypt( $tokens );
+    // -----------------------------------------------------------------------
 
-			// Restore the saved encryption class settings
-			$this->CI->encryption->restore_settings();
-		}
+    /**
+     * Unpack the tokens
+     */
+    protected function unpack_tokens($token_cookie_name)
+    {
+        $tokens = $_COOKIE[$token_cookie_name];
 
-		$tokens = explode( '|', $tokens );
+        if ($this->encrypted_tokens) {
+            // Save the current encryption class settings
+            $this->CI->encryption->save_settings();
 
-		return $tokens;
-	}
-	
-	// -----------------------------------------------------------------------
+            // Use default encryption settings
+            $this->CI->encryption->use_defaults();
 
-	/**
-	 * Pack the tokens
-	 */
-	protected function pack_tokens()
-	{
-		// If jar contains any unset indexes, remove them
-		foreach( $this->jar as $token )
-		{
-			if( ! empty( $token ) )
-			{
-				$tokens[] = $token;
-			}
-		}
-		
-		// We have tokens to implode or we don't
-		$tokens = isset( $tokens ) ? implode( '|', $tokens ) : '';
+            // Decode the tokens
+            $tokens = $this->CI->encryption->decrypt($tokens);
 
-		if( $this->encrypted_tokens )
-		{
-			// Save the current encryption class settings
-			$this->CI->encryption->save_settings();
+            // Restore the saved encryption class settings
+            $this->CI->encryption->restore_settings();
+        }
 
-			// Use default encryption settings
-			$this->CI->encryption->use_defaults();
+        $tokens = explode('|', $tokens);
 
-			// Encode the tokens
-			$tokens = $this->CI->encryption->encrypt( $tokens );
+        return $tokens;
+    }
 
-			// Restore the saved encryption class settings
-			$this->CI->encryption->restore_settings();
-		}
+    // -----------------------------------------------------------------------
 
-		return $tokens;
-	}
-	
-	// -----------------------------------------------------------------------
+    /**
+     * Pack the tokens
+     */
+    protected function pack_tokens()
+    {
+        // If jar contains any unset indexes, remove them
+        foreach ($this->jar as $token) {
+            if (!empty($token)) {
+                $tokens[] = $token;
+            }
+        }
+
+        // We have tokens to implode or we don't
+        $tokens = isset($tokens) ? implode('|', $tokens) : '';
+
+        if ($this->encrypted_tokens) {
+            // Save the current encryption class settings
+            $this->CI->encryption->save_settings();
+
+            // Use default encryption settings
+            $this->CI->encryption->use_defaults();
+
+            // Encode the tokens
+            $tokens = $this->CI->encryption->encrypt($tokens);
+
+            // Restore the saved encryption class settings
+            $this->CI->encryption->restore_settings();
+        }
+
+        return $tokens;
+    }
+
+    // -----------------------------------------------------------------------
 }
 
 /* End of file Tokens.php */

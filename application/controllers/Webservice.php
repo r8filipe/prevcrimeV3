@@ -75,4 +75,26 @@ class Webservice extends My_Controller
             ->set_output(json_encode($message));
 
     }
+
+    public function loginValidate()
+    {
+        $data['user_string'] = $this->input->get('login_string');
+        $data['passwd'] = $this->input->get('login_pass');
+        $data['requirement'] = 1;
+
+        $auth = new Authentication();
+        $auth_data = $auth->validateLogin($data);
+
+        $message['status'] = 'FAIL';
+        if (isset($auth_data->username)) {
+            $message['status'] = 'SUCCESS';
+            $data = array(
+                'user_id' => $auth_data->user_id,
+                'username' => $auth_data->username
+            );
+            $message['data'] = $data;
+        }
+        $this->output->set_content_type('application/json')
+            ->set_output(json_encode($message));
+    }
 }
