@@ -113,6 +113,24 @@ class Auth extends MY_Controller
 
                 echo '</pre>';
             }
+
+            if (config_item('add_acl_query_to_auth_functions') && $this->acl) {
+                echo '<br />
+                    <pre>';
+
+                print_r($this->acl);
+
+                echo '</pre>';
+            }
+
+            /**
+             * ACL usage doesn't require ACL be added to auth vars.
+             * If query not performed during authentication,
+             * the acl_permits function will query the DB.
+             */
+            if ($this->acl_permits('general.secret_action')) {
+                echo '<p>ACL permission grants action!</p>';
+            }
         } else {
             echo 'Nobody logged in.';
         }
@@ -143,10 +161,10 @@ class Auth extends MY_Controller
     {
         // Customize this array for your user
         $user_data = array(
-            'username' => 'henrique',
-            'passwd' => 'Henrique2',
-            'email' => 'henrique@example.com',
-            'auth_level' => '9', // 9 if you want to login @ examples/index.
+            'username' => 'skunkbot',
+            'passwd' => 'PepeLePew7',
+            'email' => 'skunkbot@example.com',
+            'auth_level' => '1', // 9 if you want to login @ examples/index.
         );
 
         $this->is_logged_in();
@@ -287,7 +305,7 @@ class Auth extends MY_Controller
                     } else {
                         /**
                          * Use the authentication libraries salt generator for a random string
-                         * that will be hashed and stored as the password recovery log.
+                         * that will be hashed and stored as the password recovery key.
                          * Method is called 4 times for a 88 character string, and then
                          * trimmed to 72 characters
                          */

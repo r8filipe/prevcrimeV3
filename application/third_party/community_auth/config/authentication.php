@@ -47,6 +47,23 @@ $config['groups'] = array(
 
 /*
 | -----------------------------------------------------------------
+|				ADD ACL QUERY TO AUTH FUNCTIONS							
+| -----------------------------------------------------------------
+| This config option turns on an additional query to retreive a logged
+| in user's ACL records when they login or when login status is checked. 
+| If you're not going to implement your own ACL categories, actions, 
+| and take the time to create an interface to manage the ACL, then 
+| you would leave this set to FALSE. Furthermore, basic ACL usage doesn't
+| require that this option be set to true, because usage of the 
+| Auth_model->acl_permits method will query the database if it hasn't
+| already been done.
+|
+*/
+
+$config['add_acl_query_to_auth_functions'] = FALSE;
+
+/*
+| -----------------------------------------------------------------
 |						MAX_ALLOWED_ATTEMPTS						
 | -----------------------------------------------------------------
 | This definition sets the maximum amount of failed login attempts
@@ -124,7 +141,7 @@ $config['seconds_on_hold'] = 600;
 |
 */
 
-$config['disallow_multiple_logins'] = TRUE;
+$config['disallow_multiple_logins'] = FALSE;
 
 /*
 | -----------------------------------------------------------------

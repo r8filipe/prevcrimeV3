@@ -122,6 +122,26 @@ class Examples extends MY_Controller
 
                 echo '</pre>';
             }
+
+            if( config_item('add_acl_query_to_auth_functions') && $this->acl )
+            {
+                echo '<br />
+                    <pre>';
+
+                print_r( $this->acl );
+
+                echo '</pre>';
+            }
+
+            /**
+             * ACL usage doesn't require ACL be added to auth vars.
+             * If query not performed during authentication, 
+             * the acl_permits function will query the DB.
+             */
+            if( $this->acl_permits('general.secret_action') )
+            {
+                echo '<p>ACL permission grants action!</p>';
+            }
         }
         else
         {
@@ -585,5 +605,5 @@ class Examples extends MY_Controller
     // -----------------------------------------------------------------------
 }
 
-/* End of file Authenticate.php */
-/* Location: /community_auth/controllers/Authenticate.php */
+/* End of file Examples.php */
+/* Location: /community_auth/controllers/Examples.php */
