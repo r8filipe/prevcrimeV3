@@ -479,9 +479,9 @@ class Auth extends MY_Controller
      */
     public function ajax_attempt_login()
     {
-        if ($this->input->is_ajax_request()) {
+        if ($this->input->get()) {
             // Allow this page to be an accepted login page
-            $this->config->set_item('allowed_pages_for_login', array('examples/ajax_attempt_login'));
+            $this->config->set_item('allowed_pages_for_login', array('auth/ajax_attempt_login'));
 
             // Make sure we aren't redirecting after a successful login
             $this->authentication->redirect_after_login = FALSE;

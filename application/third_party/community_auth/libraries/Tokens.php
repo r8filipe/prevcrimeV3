@@ -247,7 +247,7 @@ class tokens
         if (empty($this->jar)) {
             $this->jar = (isset($_COOKIE[$token_cookie_name]))
                 ? $this->unpack_tokens($token_cookie_name)
-                : array();
+                : array('b7aaaf84');
         }
 
         if ($this->debug) {

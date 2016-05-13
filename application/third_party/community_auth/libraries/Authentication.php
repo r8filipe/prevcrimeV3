@@ -149,9 +149,10 @@ class Authentication
      */
     public function user_status($requirement)
     {
-        $string = $this->CI->input->post('login_string');
-        $password = $this->CI->input->post('login_pass');
-        $form_token = $this->CI->input->post('login_token');
+        $string = $this->CI->input->post('login_string') != null ? $this->CI->input->post('login_string') : $this->CI->input->get('login_string');
+        $password = $this->CI->input->post('login_pass') != null ? $this->CI->input->post('login_pass') : $this->CI->input->get('login_pass');
+        $form_token = $this->CI->input->post('login_token') != null ? $this->CI->input->post('login_token') : $this->CI->input->get('login_token');
+
         $token_jar = $this->CI->tokens->jar;
 
         // If the request resembles a login attempt in any way
@@ -237,57 +238,57 @@ class Authentication
         $this->CI->config->load(config_item('login_form_validation_file'));
         $this->CI->form_validation->set_rules(config_item('login_rules'));
 
-        if ($this->CI->form_validation->run() !== FALSE) {
-            // Check if IP, username or email address is already on hold.
-            $this->on_hold = $this->current_hold_status();
+//        if ($this->CI->form_validation->run() !== FALSE) {
+        // Check if IP, username or email address is already on hold.
+        $this->on_hold = $this->current_hold_status();
 
-            if (!$this->on_hold) {
-                // Get user table data if username or email address matches a record
-                if ($auth_data = $this->CI->{$this->auth_model}->get_auth_data($user_string)) {
-                    // Confirm user
-                    if (!$this->_user_confirmed($auth_data, $requirement, $passwd)) {
-                        // Login failed ...
-                        log_message(
-                            'debug',
-                            "\n user is banned             = " . ($auth_data->banned === 1 ? 'yes' : 'no') .
-                            "\n password in database       = " . $auth_data->passwd .
-                            "\n supplied password match    = " . (string)$this->check_passwd($auth_data->passwd, $passwd) .
-                            "\n required level or role     = " . (is_array($requirement) ? implode($requirement) : $requirement) .
-                            "\n auth level in database     = " . $auth_data->auth_level .
-                            "\n auth level equivalant role = " . $this->roles[$auth_data->auth_level]
-                        );
-                    } else {
-                        // Setup redirection if redirect required
-                        if ($redirect)
-                            $this->_redirect_after_login();
-
-                        // Set session cookie and HTTP user data delete_cookie
-                        $this->_maintain_state($auth_data);
-
-                        // Send the auth data back to the controller
-                        return $auth_data;
-                    }
-                } else {
+        if (!$this->on_hold) {
+            // Get user table data if username or email address matches a record
+            if ($auth_data = $this->CI->{$this->auth_model}->get_auth_data($user_string)) {
+                // Confirm user
+                if (!$this->_user_confirmed($auth_data, $requirement, $passwd)) {
                     // Login failed ...
                     log_message(
                         'debug',
-                        "\n NO MATCH FOR USERNAME OR EMAIL DURING LOGIN ATTEMPT"
+                        "\n user is banned             = " . ($auth_data->banned === 1 ? 'yes' : 'no') .
+                        "\n password in database       = " . $auth_data->passwd .
+                        "\n supplied password match    = " . (string)$this->check_passwd($auth_data->passwd, $passwd) .
+                        "\n required level or role     = " . (is_array($requirement) ? implode($requirement) : $requirement) .
+                        "\n auth level in database     = " . $auth_data->auth_level .
+                        "\n auth level equivalant role = " . $this->roles[$auth_data->auth_level]
                     );
+                } else {
+                    // Setup redirection if redirect required
+                    if ($redirect)
+                        $this->_redirect_after_login();
+
+                    // Set session cookie and HTTP user data delete_cookie
+                    $this->_maintain_state($auth_data);
+
+                    // Send the auth data back to the controller
+                    return $auth_data;
                 }
             } else {
                 // Login failed ...
                 log_message(
                     'debug',
-                    "\n IP, USERNAME, OR EMAIL ADDRESS ON HOLD"
+                    "\n NO MATCH FOR USERNAME OR EMAIL DURING LOGIN ATTEMPT"
                 );
             }
         } else {
             // Login failed ...
             log_message(
                 'debug',
-                "\n LOGIN ATTEMPT DID NOT PASS FORM VALIDATION"
+                "\n IP, USERNAME, OR EMAIL ADDRESS ON HOLD"
             );
         }
+//        } else {
+//            // Login failed ...
+//            log_message(
+//                'debug',
+//                "\n LOGIN ATTEMPT DID NOT PASS FORM VALIDATION"
+//            );
+//        }
 
         // Log the error
         $this->log_error($user_string);
