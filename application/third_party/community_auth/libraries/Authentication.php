@@ -237,7 +237,7 @@ class Authentication
         $this->CI->config->load(config_item('login_form_validation_file'));
         $this->CI->form_validation->set_rules(config_item('login_rules'));
 
-        if ($this->CI->form_validation->run() !== TURE) {
+        if ($this->CI->form_validation->run() !== FALSE) {
             // Check if IP, username or email address is already on hold.
             $this->on_hold = $this->current_hold_status();
 
