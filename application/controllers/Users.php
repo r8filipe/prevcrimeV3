@@ -55,8 +55,8 @@ class Users extends My_Controller{
         $this->is_logged_in();
         if (!empty($this->auth_role)) {
 
-            $this->parser->parse('templates/header', $data);
-            $this->parser->parse('users/createUser', $data);
+            $this->load->view('templates/header');
+            $this->load->view('users/createUser');
             $this->load->view('templates/footer');
         } else {
             $this->setup_login_form();
