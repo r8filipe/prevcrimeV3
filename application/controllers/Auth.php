@@ -161,17 +161,10 @@ class Auth extends MY_Controller
     {
         // Customize this array for your user
         $user_data = array(
-<<<<<<< HEAD
-            'username' => 'skunkbot',
-            'passwd' => 'PepeLePew7',
-            'email' => 'skunkbot@example.com',
-            'auth_level' => '1', // 9 if you want to login @ examples/index.
-=======
             'username' => $this->input->post('username'),
             'passwd' => $this->input->post('password'),
             'email' => $this->input->post('email'),
             'auth_level' => '9', // 9 if you want to login @ examples/index.
->>>>>>> Henrique
         );
 
         $this->is_logged_in();
