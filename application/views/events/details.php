@@ -121,9 +121,9 @@ $this->lang->load('details_lang', $idiom);
                     <input type="hidden" name="event_id" value="{id}"/>
                     {/event}
 
-                    <input type="file" name="userfile">
+                    <input type="file" name="userfile" multiple>
 
-                    <button type="submit" class="btn btn-default"><?php echo $this->lang->line('details_submitBtn'); ?></button>
+   1                 <button type="submit" class="btn btn-default"><?php echo $this->lang->line('details_submitBtn'); ?></button>
                     </form>
                 </div>
             </div>

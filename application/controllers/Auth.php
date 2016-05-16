@@ -143,18 +143,17 @@ class Auth extends MY_Controller
     {
         // Customize this array for your user
         $user_data = array(
-            'username' => 'henrique',
-            'passwd' => 'Henrique2',
-            'email' => 'henrique@example.com',
+            'username' => $this->input->post('username'),
+            'passwd' => $this->input->post('password'),
+            'email' => $this->input->post('email'),
             'auth_level' => '9', // 9 if you want to login @ examples/index.
         );
 
         $this->is_logged_in();
 
-        echo $this->load->view('examples/page_header', '', TRUE);
+        echo $this->load->view('templates/header');
 
         // Load resources
-        $this->load->model('examples_model');
         $this->load->model('validation_callables');
         $this->load->library('form_validation');
 
@@ -211,16 +210,15 @@ class Auth extends MY_Controller
                 $user_data['username'] = NULL;
             }
 
-            $this->db->set($user_data)
-                ->insert(config_item('user_table'));
+            $this->db->set($user_data)->insert(config_item('user_table'));
 
             if ($this->db->affected_rows() == 1)
-                echo '<h1>Congratulations</h1>' . '<p>User ' . $user_data['username'] . ' was created.</p>';
+                echo $this->load->view('users/users');
         } else {
             echo '<h1>User Creation Error(s)</h1>' . validation_errors();
         }
 
-        echo $this->load->view('examples/page_footer', '', TRUE);
+        echo $this->load->view('templates/footer');
     }
 
     // -----------------------------------------------------------------------
