@@ -97,4 +97,10 @@ class Webservice extends My_Controller
         $this->output->set_content_type('application/json')
             ->set_output(json_encode($message));
     }
+
+    public function jar()
+    {
+        $this->output->set_content_type('application/json')
+            ->set_output(json_encode($this->tokens->token()));
+    }
 }

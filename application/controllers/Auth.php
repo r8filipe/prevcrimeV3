@@ -453,7 +453,7 @@ class Auth extends MY_Controller
                     $.ajax({
                         type: 'post',
                         cache: false,
-                        url: '/examples/ajax_attempt_login',
+                        url: '/auth/ajax_attempt_login',
                         data: {
                             'login_string': $('#login_string').val(),
                             'login_pass': $('#login_pass').val(),
@@ -465,7 +465,7 @@ class Auth extends MY_Controller
                             console.log(response);
                             if(response.status == 1){
                                 $('form').replaceWith('<p>You are now logged in.</p>');
-                                $('#login-link').attr('href','/examples/logout').text('Logout');
+                                $('#login-link').attr('href','/auth/logout').text('Logout');
                                 $('#ajax-login-link').parent().hide();
                             }else if(response.status == 0 && response.on_hold){
                                 $('form').hide();
@@ -495,10 +495,11 @@ class Auth extends MY_Controller
      */
     public function ajax_attempt_login()
     {
-        if ($this->input->get()) {
+        $this->authentication->logout();
+
+        if ($this->input->post()) {
             // Allow this page to be an accepted login page
             $this->config->set_item('allowed_pages_for_login', array('auth/ajax_attempt_login'));
-
             // Make sure we aren't redirecting after a successful login
             $this->authentication->redirect_after_login = FALSE;
 
@@ -509,43 +510,43 @@ class Auth extends MY_Controller
             if ($this->auth_data)
                 $this->_set_user_variables();
 
-            // Call the post auth hook
+            // Call the post auth hookc
             $this->post_auth_hook();
-
             // Login attempt was successful
             if ($this->auth_data) {
-                echo json_encode(array(
-                    'status' => 1,
-                    'user_id' => $this->auth_user_id,
-                    'username' => $this->auth_username,
-                    'level' => $this->auth_level,
-                    'role' => $this->auth_role,
-                    'email' => $this->auth_email
-                ));
+
+                $message['status'] = 'success';
+                $message['user_id'] = $this->auth_user_id;
+                $message['username'] = $this->auth_username;
+                $message['level'] = $this->auth_level;
+                $message['role'] = $this->auth_role;
+                $message['email'] = $this->auth_email;
+
             } // Login attempt not successful
             else {
-                $this->tokens->name = 'login_token';
-
                 $on_hold = (
                     $this->authentication->on_hold === TRUE OR
                     $this->authentication->current_hold_status()
                 )
                     ? 1 : 0;
 
-                echo json_encode(array(
-                    'status' => 0,
-                    'count' => $this->authentication->login_errors_count,
-                    'on_hold' => $on_hold,
-                    'token' => $this->tokens->token()
-                ));
+                $message['status'] = 'fail';
+                $message['user_id'] = $this->auth_user_id;
+                $message['count'] = $this->authentication->login_errors_count;
+                $message['on_hold'] = $on_hold;
+                $message['token'] = $this->tokens->token();
+
+
             }
         } // Show 404 if not AJAX
         else {
-            show_404();
+            $message['status'] = 'error';
+            $message['message'] = 'formulario não preenchido';
         }
+        $this->output->set_content_type('application/json')
+            ->set_output(json_encode($message));
     }
-
-    // -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 }
 
 /* End of file Auth.php */
