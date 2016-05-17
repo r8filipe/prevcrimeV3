@@ -8,6 +8,7 @@ class Events extends My_Controller
         parent::__construct();
         $this->load->model('events_model');
         $this->load->model('photos_model');
+        $this->load->model('categories_model');
         $this->load->helper('url_helper');
         $this->load->helper('url');
         $this->load->helper('form');
@@ -16,22 +17,26 @@ class Events extends My_Controller
 
     public function index()
     {
-
         $this->load->library('parser');
         $this->load->helper('url');
         $this->is_logged_in();
 
-        if (!empty($this->auth_role)) {
-            echo "Teste: ".var_dump($this->input->post('begin_date'));
-            if($this->input->post('begin_date')!=null && $this->input->post('end_date')!=null){
-                $filters = array('date_range' => array( 'begin' => $_POST['begin_date'],
-                                                        'end'   => $_POST['end_date']
-                                                      )
-                                );
-                $this->session->set_userdata('events_filters', $filters);
-            }
-            $data['events'] = $this->events_model->get_events();
 
+        if (!empty($this->auth_role)) {
+            if ($this->input->post('begin_date') != '') {
+                $filters['begin_date'] = $this->input->post('begin_date');
+                $filters['end_date'] = date('Y-m-d', strtotime("+1 days"));
+            }
+
+            if ($this->input->post('end_date') != '') {
+                $filters['end_date'] = date('Y-m-d', strtotime($this->input->post('end_date')));
+            }
+            if($this->input->post('category') != ''){
+                $filters['category'] = $this->input->post('category');
+            }
+
+            $data['events'] = isset($filters) ? $this->events_model->get_events($filters) : $this->events_model->get_events();
+            $data['categories'] = $this->categories_model->get_categories();
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('events/events', $data);
             $this->load->view('templates/footer');
@@ -95,7 +100,8 @@ class Events extends My_Controller
         }
     }
 
-    public function editEvent(){
+    public function editEvent()
+    {
         $id = $this->input->post('id');
         $data = array('obs' => $this->input->post('obs'));
         $this->events_model->edit_event($id, $data);
@@ -103,16 +109,17 @@ class Events extends My_Controller
 
     }
 
-    function uploadPhoto(){
+    function uploadPhoto()
+    {
         $config['upload_path'] = './images/';
         $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size']	= '2048000';
-        $config['max_width']  = '1024';
-        $config['max_height']  = '768';
+        $config['max_size'] = '2048000';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
         $id = $this->input->post('event_id');
         $this->load->library('upload', $config);
 
-        if ($this->upload->do_upload()){
+        if ($this->upload->do_upload()) {
 
             //$data = array('upload_data' => $this->upload->data());
             $image = $this->upload->data();
@@ -122,9 +129,8 @@ class Events extends My_Controller
             );
             $this->events_model->uploadPhoto($data);
             $this->details($id);
-        }else{
+        } else {
             $error = array('error' => $this->upload->display_errors());
-            var_dump($error);
         }
 
     }
