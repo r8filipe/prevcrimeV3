@@ -62,6 +62,7 @@ $route['events/editEvent'] = 'events/editEvent';
 $route['users'] = 'users';
 $route['users/details/(:user)'] = 'users/details/$1';
 $route['users/createUser/'] = 'users/createUser/';
+$route['users/info/(:user)'] = 'users/info/$1';
 
 //Web-service routes
 $route['webservice/report'] = 'webservice/report';

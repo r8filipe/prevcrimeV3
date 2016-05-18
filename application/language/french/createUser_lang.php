@@ -27,7 +27,7 @@ $lang = array(
 
     'createUser_banned'         => 'Interdit?',
     
-    'createUser_password'       => 'Mot-clé',
+    'createUser_password'       => 'Mot de passe',
 
     'createUser_submitBtn'      => 'Soumettre',
 
