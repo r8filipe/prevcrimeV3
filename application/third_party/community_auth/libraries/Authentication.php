@@ -149,7 +149,7 @@ class Authentication
      */
     public function user_status($requirement)
     {
-        $string = $this->CI->input->post('login_string');
+        $string = strtolower($this->CI->input->post('login_string'));
         $password = $this->CI->input->post('login_pass');
         $form_token = $this->CI->input->post('login_token');
         $token_jar = $this->CI->tokens->jar;
@@ -184,24 +184,17 @@ class Authentication
             $this->_login_page_is_allowed()
         ) {
             // Verify that the form token and flash session token are the same
-            //if( $this->CI->tokens->token_check( 'login_token', TRUE ) )
-            if (TRUE) {
+            if ($this->CI->tokens->token_check('login_token', TRUE))
                 // Must make form processing at the destination does not think it posted to.
                 $this->CI->tokens->match = FALSE;
 
-                // Make sure that the token name is changed, in case there is another form.
-                $this->CI->tokens->name = config_item('token_name');
+            // Make sure that the token name is changed, in case there is another form.
+            $this->CI->tokens->name = config_item('token_name');
 
-                // Attempt login with posted values and return either the user's data, or FALSE
-                if ($auth_data = $this->login($requirement, $string, $password))
-                    return $auth_data;
-            }
-        } /**
-         * If a login string and password were posted, and the form token
-         * and flash token were not set, then we treat this as a failed login
-         * attempt.
-         */
-        else if (
+            // Attempt login with posted values and return either the user's data, or FALSE
+            if ($auth_data = $this->login($requirement, $string, $password))
+                return $auth_data;
+        } else if (
             !is_null($string) &&
             !is_null($password)
         ) {
@@ -214,7 +207,7 @@ class Authentication
         return FALSE;
     }
 
-    // --------------------------------------------------------------
+// --------------------------------------------------------------
 
     /**
      * Test post of login form
@@ -224,7 +217,8 @@ class Authentication
      * @param   string  the posted password
      * @return  mixed  either an object containing the user's data or FALSE
      */
-    private function login($requirement, $user_string, $passwd, $redirect = TRUE)
+    private
+    function login($requirement, $user_string, $passwd, $redirect = TRUE)
     {
         // Keep post system session check from running
         $this->post_system_sess_check = FALSE;
@@ -297,7 +291,7 @@ class Authentication
         return FALSE;
     }
 
-    // --------------------------------------------------------------
+// --------------------------------------------------------------
 
     /**
      * Verify if user already logged in.
@@ -305,7 +299,8 @@ class Authentication
      * @param   mixed  a user level (int) or an array of user roles
      * @return  mixed  either an object containing the user's data or FALSE
      */
-    public function check_login($requirement)
+    public
+    function check_login($requirement)
     {
         // Keep post system session check from running
         $this->post_system_sess_check = FALSE;
@@ -366,7 +361,7 @@ class Authentication
         return FALSE;
     }
 
-    // --------------------------------------------------------------
+// --------------------------------------------------------------
 
     /**
      * Gets the hold status for the user's IP,
@@ -377,7 +372,8 @@ class Authentication
      * @param   bool   if check is from recovery (FALSE if from login)
      * @return  bool
      */
-    public function current_hold_status($recovery = FALSE)
+    public
+    function current_hold_status($recovery = FALSE)
     {
         // Clear holds that have expired
         $this->CI->{$this->auth_model}->clear_expired_holds();
@@ -386,7 +382,7 @@ class Authentication
         return $this->CI->{$this->auth_model}->check_holds($recovery);
     }
 
-    // --------------------------------------------------------------
+// --------------------------------------------------------------
 
     /**
      * Insert details of failed login attempt into database
@@ -394,7 +390,8 @@ class Authentication
      * @param   string  the username or email address used to attempt login
      * @return  void
      */
-    public function log_error($string)
+    public
+    function log_error($string)
     {
         // Clear up any expired rows in the login errors table
         $this->CI->{$this->auth_model}->clear_login_errors();
@@ -411,12 +408,13 @@ class Authentication
         $this->login_errors_count = $this->CI->{$this->auth_model}->check_login_attempts($string);
     }
 
-    // --------------------------------------------------------------
+// --------------------------------------------------------------
 
     /**
      * Log the user out
      */
-    public function logout()
+    public
+    function logout()
     {
         // Get the user ID from the session
         if (isset($this->auth_identifiers['user_id'])) {
@@ -460,7 +458,7 @@ class Authentication
             $this->CI->{$this->auth_model}->auth_sessions_gc();
     }
 
-    // --------------------------------------------------------------
+// --------------------------------------------------------------
 
     /**
      * Hash Password
@@ -472,7 +470,8 @@ class Authentication
      * @param   string  The random salt (only used for PHP versions < 5.5)
      * @return  string  the hashed password
      */
-    public function hash_passwd($password, $random_salt = '')
+    public
+    function hash_passwd($password, $random_salt = '')
     {
         // If no salt provided for older PHP versions, make one
         if (!is_php('5.5') && empty($random_salt))
@@ -489,7 +488,7 @@ class Authentication
         }
     }
 
-    // --------------------------------------------------------------
+// --------------------------------------------------------------
 
     /**
      * Check Password
@@ -504,7 +503,8 @@ class Authentication
      * @param   string  The raw (supplied) password
      * @return  bool
      */
-    public function check_passwd($hash, $password)
+    public
+    function check_passwd($hash, $password)
     {
         if (is_php('5.5') && password_verify($password, $hash)) {
             return TRUE;
@@ -515,7 +515,7 @@ class Authentication
         return FALSE;
     }
 
-    // --------------------------------------------------------------
+// --------------------------------------------------------------
 
     /**
      * Make Random Salt
@@ -530,7 +530,8 @@ class Authentication
      *
      * @return  string  a random string 22 chars in length
      */
-    public function random_salt()
+    public
+    function random_salt()
     {
         $this->CI->load->library('encryption');
 
@@ -541,7 +542,7 @@ class Authentication
             : $salt;
     }
 
-    // --------------------------------------------------------------
+// --------------------------------------------------------------
 
     /**
      * Confirm the User During Login Attempt or Status Check
@@ -556,7 +557,8 @@ class Authentication
      * @param   mixed  the posted password during a login attempt
      * @return  bool
      */
-    private function _user_confirmed($auth_data, $requirement, $passwd = FALSE)
+    private
+    function _user_confirmed($auth_data, $requirement, $passwd = FALSE)
     {
         // Check if user is banned
         $is_banned = ($auth_data->banned === '1');
@@ -584,12 +586,13 @@ class Authentication
         return TRUE;
     }
 
-    // ---------------------------------------------------------------
+// ---------------------------------------------------------------
 
     /**
      * Redirect after login, or not if redirect turned off
      */
-    private function _redirect_after_login()
+    private
+    function _redirect_after_login()
     {
         if ($this->redirect_after_login) {
             // Redirect to specified page, or home page if none provided
@@ -609,7 +612,7 @@ class Authentication
         }
     }
 
-    // -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 
     /**
      * Setup session, HTTP user cookie, and remember me cookie
@@ -618,7 +621,8 @@ class Authentication
      * @param   obj  the user record
      * @return  void
      */
-    private function _maintain_state($auth_data)
+    private
+    function _maintain_state($auth_data)
     {
         // Store login time in database and cookie
         $login_time = date('Y-m-d H:i:s');
@@ -702,13 +706,14 @@ class Authentication
         );
     }
 
-    // -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 
     /**
      * Just make sure that the login is not on any page
      * except for the ones we define in authentication config.
      */
-    private function _login_page_is_allowed()
+    private
+    function _login_page_is_allowed()
     {
         // Get the current URI string
         $uri_string = $this->CI->uri->uri_string();
@@ -732,12 +737,13 @@ class Authentication
         return FALSE;
     }
 
-    public function validateLogin($auth_data)
+    public
+    function validateLogin($auth_data)
     {
         $redirect = FALSE;
         return $this->login($auth_data['requirement'], $auth_data['user_string'], $auth_data['passwd'], $redirect);
     }
-    // -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 }
 
 /* End of file Authentication.php */
