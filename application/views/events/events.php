@@ -1,8 +1,8 @@
 <?php
 //Obtain User language
-if(isset($_SESSION['language'])){
+if (isset($_SESSION['language'])) {
     $idiom = $_SESSION['language'];
-}else {
+} else {
     $idiom = $this->config->item('language');
 }
 //Load of language file
@@ -56,27 +56,28 @@ $this->lang->load('events_lang', $idiom);
                 <table class="table table-striped table-bordered table-hover" id="dataTables-event">
                     <thead>
                     <tr>
+                        <th hidden>id</th>
                         <th><?php echo $this->lang->line('events_columnAddress'); ?></th>
                         <th><?php echo $this->lang->line('events_columnCategory'); ?></th>
                         <th><?php echo $this->lang->line('events_columnOccurrence'); ?></th>
                         <th hidden><?php echo $this->lang->line('events_columnLocal'); ?></th>
                         <th hidden>obs</th>
+
                         <th><?php echo $this->lang->line('events_columnDateTime'); ?></th>
-                        <th><?php echo $this->lang->line('events_columnOptions'); ?></th>
                     </tr>
                     </thead>
                     <tbody>
                     {events}
                     <tr>
-                        <td>{address}</td>
+                        <td hidden>{id}</td>
+                        <td>
+                            <a href="<?php echo base_url(); ?>events/details/{id}">{address}</a>
+                        </td>
                         <td class="center">{category}</td>
                         <td class="center">{occurrence}</td>
                         <td class="center" hidden>{local_type_id}</td>
                         <td class="center" hidden>{obs}</td>
                         <td class="center">{created_at}</td>
-                        <td class="center">
-                            <a href="<?php echo base_url(); ?>events/details/{id}"><?php echo $this->lang->line('events_optionWatch'); ?></a>
-                        </td>
                     </tr>
                     {/events}
                     </tbody>

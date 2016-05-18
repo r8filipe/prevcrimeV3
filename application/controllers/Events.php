@@ -31,7 +31,7 @@ class Events extends My_Controller
             if ($this->input->post('end_date') != '') {
                 $filters['end_date'] = date('Y-m-d', strtotime($this->input->post('end_date')));
             }
-            if($this->input->post('category') != ''){
+            if ($this->input->post('category') != '') {
                 $filters['category'] = $this->input->post('category');
             }
 
