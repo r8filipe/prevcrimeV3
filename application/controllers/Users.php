@@ -43,6 +43,7 @@ class Users extends My_Controller
         $this->is_logged_in();
         if (!empty($this->auth_role)) {
             $data['user'] = $this->users_model->get_users($user);
+            $data['user'][0]['banned'] = $data['user'][0]['banned'] == 0 ? 'Não' : 'Sim';
 
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('users/details', $data);
@@ -107,7 +108,7 @@ class Users extends My_Controller
         if (!empty($this->auth_role)) {
             $id = $this->input->post('user_id');
             $data = array('username' => strtolower($this->input->post('username')),
-                          'passwd' => $this->authentication->hash_passwd($this->input->post('password'))
+                'passwd' => $this->authentication->hash_passwd($this->input->post('password'))
             );
             $this->users_model->edit_user($id, $data);
 
