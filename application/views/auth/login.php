@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>PrevCrime - Login</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url(); ?>dist/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -64,7 +64,7 @@ if (!isset($on_hold_message)) {
     echo '<img src="'.base_url().'dist/images/opvc-icon.png" align="middle" class="img-responsive center-block">';
     echo form_open($login_url, array('class' => 'form-signin'));
     ?>
-            <input name="login_string" id="login_string" class="form-control" placeholder="Email address" required="" autofocus="" type="text">
+            <input name="login_string" id="login_string" class="form-control" placeholder="Email" required="" autofocus="" type="text">
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" name="login_pass" id="login_pass" class="form-control"
                maxlength="<?php echo config_item('max_chars_for_password'); ?>" autocomplete="off"
@@ -77,14 +77,14 @@ if (!isset($on_hold_message)) {
                     <?php
                     if (config_item('allow_remember_me')) {
                         ?>
-                        <input value="yes" type="checkbox" id="remember_me" name="remember_me"> Remember me
+                        <input value="yes" type="checkbox" id="remember_me" name="remember_me"> Relembrar-me
                         <?php
                     }
                     ?>
                 </label>
             </div>
 
-            <button class="btn btn-lg btn-primary btn-block">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block">Iniciar sessão</button>
         </form>
     </div> <!-- /container -->
 

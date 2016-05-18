@@ -32,7 +32,7 @@ $this->lang->load('users_lang', $idiom);
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                         <tr>
-                            <th><?php echo $this->lang->line('users_columnId'); ?></th>
+                            <th hidden><?php echo $this->lang->line('users_columnId'); ?></th>
                             <th><?php echo $this->lang->line('users_columnUsername'); ?></th>
                             <th><?php echo $this->lang->line('users_columnEmail'); ?></th>
                             <th><?php echo $this->lang->line('users_columnAuthLevel'); ?></th>
@@ -44,7 +44,7 @@ $this->lang->load('users_lang', $idiom);
                         <tbody>
                         {users}
                         <tr class="gradeU">
-                            <td>{user_id}</td>
+                            <td hidden>{user_id}</td>
                             <td>{username}</td>
                             <td>{email}</td>
                             <td>{auth_level}</td>

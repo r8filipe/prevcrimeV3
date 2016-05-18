@@ -123,23 +123,23 @@ $this->lang->load('master_lang', $idiom);
                 <ul class="nav" id="side-menu">
                     <li>
                         <a href="<?php echo base_url(); ?>events"><i
-                                class="fa fa-bug"></i><?php echo $this->lang->line('master_menuOccurrences'); ?></a>
+                                class="fa fa-bug"></i> <?php echo $this->lang->line('master_menuOccurrences'); ?></a>
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>events/map"><i
-                                class="fa fa-globe"></i><?php echo $this->lang->line('master_menuMap'); ?></a>
+                                class="fa fa-globe"></i> <?php echo $this->lang->line('master_menuMap'); ?></a>
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>statistics"><i
-                                class="fa fa-globe"></i><?php echo $this->lang->line('master_menuStatistics'); ?></a>
+                                class="fa fa-area-chart"></i> <?php echo $this->lang->line('master_menuStatistics'); ?></a>
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>users"><i
-                                class="fa fa-globe"></i><?php echo $this->lang->line('master_menuUsers'); ?></a>
+                                class="fa fa-users"></i> <?php echo $this->lang->line('master_menuUsers'); ?></a>
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>users/createUser"><i
-                                class="fa fa-globe"></i><?php echo $this->lang->line('master_menuCreateUser'); ?></a>
+                                class="fa fa-user"></i> <?php echo $this->lang->line('master_menuCreateUser'); ?></a>
                     </li>
                 </ul>
             </div>

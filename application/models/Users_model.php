@@ -35,7 +35,7 @@ class Users_model extends CI_Model
 
         $data = array(
             'user_id' => $this->examples_model->get_unused_id(),
-            'username' => $this->input->post('username'),
+            'username' => strtolower($this->input->post('username')),
             'email' => $this->input->post('email'),
             'passwd' => $this->authentication->hash_passwd($this->input->post('password')),
             'created_at'=> date('Y-m-d H:i:s'),

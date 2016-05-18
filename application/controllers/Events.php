@@ -99,7 +99,6 @@ class Events extends My_Controller
         $data = array('obs' => $this->input->post('obs'));
         $this->events_model->edit_event($id, $data);
         $this->details($id);
-
     }
 
     function uploadPhoto(){

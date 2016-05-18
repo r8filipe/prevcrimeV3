@@ -17,7 +17,7 @@ $this->lang->load('createUser_lang', $idiom);
 ?>
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?php echo $this->lang->line('users_title'); ?></h1>
+        <h1 class="page-header"><?php echo $this->lang->line('createUser_containerTitle'); ?></h1>
         <?php echo validation_errors(); ?>
     </div>
     <!-- /.col-lg-12 -->
@@ -47,12 +47,6 @@ $this->lang->load('createUser_lang', $idiom);
                             <option><?php echo $this->lang->line('createUser_staff'); ?></option>
                             <option><?php echo $this->lang->line('createUser_scavenger'); ?></option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label><?php echo $this->lang->line('createUser_banned'); ?></label>
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="banned">
-                        </label>
                     </div>
                     <div class="form-group">
                         <label><?php echo $this->lang->line('createUser_password'); ?></label>
