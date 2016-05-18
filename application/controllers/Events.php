@@ -22,11 +22,11 @@ class Events extends My_Controller
         $this->is_logged_in();
 
         if (!empty($this->auth_role)) {
-            if($this->input->post('begin_date')!=null && $this->input->post('end_date')!=null){
-                $filters = array('date_range' => array( 'begin' => $_POST['begin_date'],
-                                                        'end'   => $_POST['end_date']
-                                                      )
-                                );
+            if ($this->input->post('begin_date') != null && $this->input->post('end_date') != null) {
+                $filters = array('date_range' => array('begin' => $_POST['begin_date'],
+                    'end' => $_POST['end_date']
+                )
+                );
                 $this->session->set_userdata('events_filters', $filters);
             }
             $data['events'] = $this->events_model->get_events();
@@ -94,25 +94,25 @@ class Events extends My_Controller
         }
     }
 
-    public function editEvent(){
+    public function editEvent()
+    {
         $id = $this->input->post('id');
         $data = array('obs' => $this->input->post('obs'));
         $this->events_model->edit_event($id, $data);
         $this->details($id);
     }
 
-    function uploadPhoto(){
-        $config['upload_path'] = './images/';
+    function uploadPhoto()
+    {
+        $config['upload_path'] = 'images/';
         $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size']	= '2048000';
-        $config['max_width']  = '1024';
-        $config['max_height']  = '768';
+        $config['max_size'] = '2048000';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
         $id = $this->input->post('event_id');
         $this->load->library('upload', $config);
-
-        if ($this->upload->do_upload()){
-
-            //$data = array('upload_data' => $this->upload->data());
+        $this->upload->initialize($config);
+        if ($this->upload->do_upload()) {
             $image = $this->upload->data();
             $data = array(
                 'event_id' => $this->input->post('event_id'),
@@ -120,8 +120,9 @@ class Events extends My_Controller
             );
             $this->events_model->uploadPhoto($data);
             $this->details($id);
-        }else{
+        } else {
             $error = array('error' => $this->upload->display_errors());
+            $this->details($id);
         }
 
     }
