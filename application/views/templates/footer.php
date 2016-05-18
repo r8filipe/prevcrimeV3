@@ -49,8 +49,6 @@
             },
         });
         new $.fn.dataTable.FixedHeader( events_table );
-        $('#begin_date').keyup( function() { events_table.draw(); } );
-        $('#end_date').keyup( function() { events_table.draw(); } );
 
     });
 </script>
@@ -59,6 +57,7 @@
 
 <script src="<?php echo base_url(); ?>dist/flot/jquery.flot.js"></script>
 <script src="<?php echo base_url(); ?>dist/flot/jquery.flot.pie.js"></script>
+<?php echo ($dimL = (isset($_SESSION['language'])?$_SESSION['language']:$this->config->item('language')))=='portuguese'?'pt':($dimL=='english'?'en-GB':'fr'); ?>
 </body>
 
 </html>

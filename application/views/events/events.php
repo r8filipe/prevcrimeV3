@@ -1,8 +1,8 @@
 <?php
 //Obtain User language
-if (isset($_SESSION['language'])) {
+if(isset($_SESSION['language'])){
     $idiom = $_SESSION['language'];
-} else {
+}else {
     $idiom = $this->config->item('language');
 }
 //Load of language file
@@ -24,21 +24,34 @@ $this->lang->load('events_lang', $idiom);
             <div class="panel-body">
                 <!--<div class="dataTable_wrapper">-->
                 <!-- Filtros -->
-                <form role="form" method="post" action="<?php echo base_url() . "events"; ?>">
+                <form role="form" method="post" action="<?php echo base_url() . "events"; ?>" id="sEvents"
+                      class="form-inline">
                     <div class="form-group">
                         <label><?php echo $this->lang->line('events_beginDate'); ?></label>
                         <div id="datepicker">
-                            <input class="form-control" type="text" id="begin_date">
+                            <input class="form-control" type="text" name="begin_date">
                         </div>
                     </div>
                     <div class="form-group">
                         <label><?php echo $this->lang->line('events_endDate'); ?></label>
                         <div id="datepicker">
-                            <input class="form-control" type="text" id="end_date">
+                            <input class="form-control" type="text" name="end_date">
                         </div>
                     </div>
-                    <button type="submit"
-                            class="btn btn-default"><?php echo $this->lang->line('events_submitBtn'); ?></button>
+                    <div class="form-group">
+                        <label><?php echo $this->lang->line('events_categories'); ?></label><br/>
+                        <select class="form-control" name="category">
+                            <option value="" selected></option>
+                            {categories}
+                            <option value="{id}">{category}</option>
+                            {/categories}
+                        </select>
+                    </div>
+                    <div class="well" style="background: none; border: none">
+                        <button class="form-group btn" type="submit"
+                                class="btn btn-default"><?php echo $this->lang->line('events_submitBtn'); ?></button>
+                    </div>
+
                 </form>
                 <table class="table table-striped table-bordered table-hover" id="dataTables-event">
                     <thead>
@@ -49,19 +62,21 @@ $this->lang->load('events_lang', $idiom);
                         <th hidden><?php echo $this->lang->line('events_columnLocal'); ?></th>
                         <th hidden>obs</th>
                         <th><?php echo $this->lang->line('events_columnDateTime'); ?></th>
+                        <th><?php echo $this->lang->line('events_columnOptions'); ?></th>
                     </tr>
                     </thead>
                     <tbody>
                     {events}
                     <tr>
-                        <td>
-                            <a href="<?php echo base_url(); ?>events/details/{id}">{address}</a>
-                        </td>
+                        <td>{address}</td>
                         <td class="center">{category}</td>
                         <td class="center">{occurrence}</td>
                         <td class="center" hidden>{local_type_id}</td>
                         <td class="center" hidden>{obs}</td>
                         <td class="center">{created_at}</td>
+                        <td class="center">
+                            <a href="<?php echo base_url(); ?>events/details/{id}"><?php echo $this->lang->line('events_optionWatch'); ?></a>
+                        </td>
                     </tr>
                     {/events}
                     </tbody>
