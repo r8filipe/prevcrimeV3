@@ -38,19 +38,19 @@ $this->lang->load('users_lang', $idiom);
                             <th><?php echo $this->lang->line('users_columnAuthLevel'); ?></th>
                             <th><?php echo $this->lang->line('users_columnBanned'); ?></th>
                             <th><?php echo $this->lang->line('users_columnLastLogin'); ?></th>
-                            <th><?php echo $this->lang->line('users_columnOptions'); ?></th>
                         </tr>
                         </thead>
                         <tbody>
                         {users}
                         <tr class="gradeU">
                             <td hidden>{user_id}</td>
-                            <td>{username}</td>
+                            <td>
+                                <a href="<?php echo base_url(); ?>users/details/{user_id}">{username}</a>
+                            </td>
                             <td>{email}</td>
                             <td>{auth_level}</td>
                             <td>{banned}</td>
                             <td>{last_login}</td>
-                            <td> <a href="<?php echo base_url(); ?>users/details/{user_id}"><?php echo $this->lang->line('users_optionWatch'); ?></a></td>
                         </tr>
                         {/users}
                         </tbody>

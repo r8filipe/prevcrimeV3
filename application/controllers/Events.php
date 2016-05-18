@@ -22,7 +22,6 @@ class Events extends My_Controller
         $this->is_logged_in();
 
         if (!empty($this->auth_role)) {
-            echo "Teste: ".var_dump($this->input->post('begin_date'));
             if($this->input->post('begin_date')!=null && $this->input->post('end_date')!=null){
                 $filters = array('date_range' => array( 'begin' => $_POST['begin_date'],
                                                         'end'   => $_POST['end_date']
@@ -123,7 +122,6 @@ class Events extends My_Controller
             $this->details($id);
         }else{
             $error = array('error' => $this->upload->display_errors());
-            var_dump($error);
         }
 
     }
