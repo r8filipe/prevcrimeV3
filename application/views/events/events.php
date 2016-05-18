@@ -1,8 +1,8 @@
 <?php
 //Obtain User language
-if (isset($_SESSION['language'])) {
+if(isset($_SESSION['language'])){
     $idiom = $_SESSION['language'];
-} else {
+}else {
     $idiom = $this->config->item('language');
 }
 //Load of language file

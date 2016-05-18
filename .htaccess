@@ -12,7 +12,7 @@ Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type,
 # you have to change it to: RewriteBase /my_project/
 # If your site begins from the root e.g. example.local/ then
 # let it as it is
-RewriteBase /prevcrime/
+RewriteBase /prevcrimeV3/
 
 # Protect application and system files from being viewed when the index.php is missing
 RewriteCond $1 ^(application|system|private|logs)

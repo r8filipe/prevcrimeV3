@@ -29,6 +29,22 @@ class Users_model extends CI_Model
         return $query->result_array();
     }
 
+    public function insert(){
+        $this->load->helper('url');
+        $this->load->model('examples_model');
+
+        $data = array(
+            'user_id' => $this->examples_model->get_unused_id(),
+            'username' => strtolower($this->input->post('username')),
+            'email' => $this->input->post('email'),
+            'passwd' => $this->authentication->hash_passwd($this->input->post('password')),
+            'created_at'=> date('Y-m-d H:i:s'),
+            'auth_level' => '9'
+        );
+
+        return $this->db->insert('users', $data);
+    }
+
     public function edit_user($id, $data){
         $this->db->where('user_id', $id);
         $this->db->update('users', $data);

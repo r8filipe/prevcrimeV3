@@ -23,4 +23,8 @@ $lang = array(
 
     'master_menuStatistics'  => 'Estatísticas',
 
+    'master_dropuserProfile' => 'Meu Perfil',
+
+    'master_logout'          => 'Sair',
+
 );

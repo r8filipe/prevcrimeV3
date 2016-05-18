@@ -24,11 +24,12 @@ class Webservice extends My_Controller
         $data['obs'] = $this->input->get('obs');
         $data['lat'] = $coordenadas[0];
         $data['long'] = $coordenadas[1];
-
+        $data['user_id'] = $this->input->get('user');;
 
         if (!$this->db->insert('events', $data)) {
             $message['status'] = 'FAIL';
             $message['message'] = $this->db->error();
+
         } else {
             $message['status'] = 'SUCCESS';
             $message['message'] = 'Evento inserido comm sucesso';
@@ -76,25 +77,9 @@ class Webservice extends My_Controller
 
     }
 
-    public function loginValidate()
+    public function jar()
     {
-        $data['user_string'] = $this->input->get('login_string');
-        $data['passwd'] = $this->input->get('login_pass');
-        $data['requirement'] = 1;
-
-        $auth = new Authentication();
-        $auth_data = $auth->validateLogin($data);
-
-        $message['status'] = 'FAIL';
-        if (isset($auth_data->username)) {
-            $message['status'] = 'SUCCESS';
-            $data = array(
-                'user_id' => $auth_data->user_id,
-                'username' => $auth_data->username
-            );
-            $message['data'] = $data;
-        }
         $this->output->set_content_type('application/json')
-            ->set_output(json_encode($message));
+            ->set_output(json_encode($this->tokens->token()));
     }
 }

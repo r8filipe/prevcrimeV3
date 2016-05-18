@@ -35,7 +35,7 @@ $lat = $this->config->item('lat');
                     var iconFeature = new ol.Feature({
                         geometry: new ol.geom.Point(ol.proj.transform([{long}, {lat}], 'EPSG:4326',
                             'EPSG:3857')),
-                        name: "{occurrence}" + "</br><a href='<?php echo base_url(); ?>events/details/{id}' target='_blank'>Ver detalhes</a>",
+                        name: "{occurrence}" + "</br><a href='<?php echo base_url(); ?>events/details/{id}'>Ver detalhes</a>",
                         population: 4000,
                         rainfall: 500
                     });

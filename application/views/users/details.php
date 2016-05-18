@@ -16,7 +16,7 @@ $this->lang->load('userDetails_lang', $idiom);
 ?>
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?php echo $this->lang->line('users_title'); ?></h1>
+        <h1 class="page-header"><?php echo $this->lang->line('userDetails_containerTitle'); ?></h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -43,6 +43,13 @@ $this->lang->load('userDetails_lang', $idiom);
                         <label><?php echo $this->lang->line('userDetails_createdAt'); ?></label>
                         <p>{created_at}</p>
                         {/user}
+                        <?php
+                            if ($this->auth_user_id == $user[0]["user_id"]){
+                                echo '<form action="'.base_url().'users/info/'.$this->auth_user_id.'">
+                                      <button type="submit" class="btn btn-default">Editar
+                                      </form>';
+                            }
+                        ?>
                     </div>
                 </div>
             </div>

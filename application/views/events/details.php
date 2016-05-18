@@ -6,9 +6,9 @@
  * Time: 01:46
  */
 //Obtain User language
-if(isset($_SESSION['language'])){
+if (isset($_SESSION['language'])) {
     $idiom = $_SESSION['language'];
-}else {
+} else {
     $idiom = $this->config->item('language');
 }
 //Load of language file
@@ -26,7 +26,7 @@ $this->lang->load('details_lang', $idiom);
             <div class="panel-heading">
                 <?php echo $this->lang->line('details_containerTitle'); ?>
             </div>
-            <div class="panel-body" style="height: 230px">
+            <div class="panel-body" >
                 <div class="row">
                     <div class="col-lg-6">
                         {event}
@@ -59,14 +59,15 @@ $this->lang->load('details_lang', $idiom);
             <div class="panel-heading">
                 <?php echo $this->lang->line('details_containerObs'); ?>
             </div>
-            <div class="panel-body" style="height: 230px">
+            <div class="panel-body">
                 {event}
                 <form role="form" method="post" action="<?php echo base_url() . "Events/editEvent" ?>">
                     <input type="hidden" name="id" value="{id}">
                     <div class="form-group">
-                        <textarea name="obs" class="form-control" rows="5" style="resize: none">{obs}</textarea>
+                        <textarea name="obs" class="form-control" rows="10" style="resize: none">{obs}</textarea>
                     </div>
-                    <button type="submit" class="btn btn-default"><?php echo $this->lang->line('details_submitBtn'); ?></button>
+                    <button type="submit"
+                            class="btn btn-default"><?php echo $this->lang->line('details_submitBtn'); ?></button>
                 </form>
                 {/event}
             </div>
@@ -83,7 +84,7 @@ $this->lang->load('details_lang', $idiom);
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="min-height:300px ">
                         <!-- Indicators -->
                         <ol class="carousel-indicators">
                             <?php
@@ -116,14 +117,14 @@ $this->lang->load('details_lang', $idiom);
                 </div>
                 <div class="row">
 
-                    <?php echo form_open_multipart('events/uploadPhoto');?>
+                    <?php echo form_open_multipart('events/uploadPhoto'); ?>
                     {event}
                     <input type="hidden" name="event_id" value="{id}"/>
                     {/event}
 
                     <input type="file" name="userfile" multiple>
-
-   1                 <button type="submit" class="btn btn-default"><?php echo $this->lang->line('details_submitBtn'); ?></button>
+                    <button type="submit"
+                            class="btn btn-default"><?php echo $this->lang->line('details_submitBtn'); ?></button>
                     </form>
                 </div>
             </div>
@@ -133,9 +134,9 @@ $this->lang->load('details_lang', $idiom);
     <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <?php echo $this->lang->line('details_map');?>
+                <?php echo $this->lang->line('details_map'); ?>
             </div>
-            <div class="panel-body" style="height: 330px">
+            <div class="panel-body" style="height: 400px">
                 <div id="map" class="map">
                     <div id="popup"></div>
                 </div>
