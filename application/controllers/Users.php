@@ -54,16 +54,16 @@ class Users extends My_Controller
         }
     }
 
-    public function info($user)
+    public function info()
     {
         $this->load->library('parser');
         $this->load->helper('url');
         $this->is_logged_in();
         if (!empty($this->auth_role)) {
-            $data['user'] = $this->users_model->get_users($user);
+            $data['user'] = $this->users_model->get_users($this->auth_user_id);
 
             $this->parser->parse('templates/header', $data);
-            $this->parser->parse('users/edituser', $data);
+            $this->parser->parse('users/editUser', $data);
             $this->load->view('templates/footer');
         } else {
             $this->setup_login_form();
