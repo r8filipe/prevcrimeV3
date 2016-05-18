@@ -59,6 +59,17 @@ class Auth_Controller extends CI_Controller {
 	protected $auth_data;
 
 	/**
+	 * The logged-in user's ACL permissions after login, 
+	 * or after login status check.
+	 *
+	 * If query for ACL performed, this variable becomes an array.
+	 *
+	 * @var mixed
+	 * @access public
+	 */
+	public $acl = NULL;
+
+	/**
 	 * Either 'https' or 'http' depending on the current environment
 	 *
 	 * @var string
@@ -395,6 +406,14 @@ class Auth_Controller extends CI_Controller {
 		$this->config->set_item( 'auth_role',     $this->auth_role );
 		$this->config->set_item( 'auth_email',    $this->auth_email );
 
+		// Add ACL permissions if ACL query turned on
+		if( config_item('add_acl_query_to_auth_functions') )
+		{
+			$this->acl   = $this->auth_data->acl;
+			$data['acl'] = $this->acl;
+			$this->config->set_item( 'acl', $this->acl );
+		}
+
 		// Load vars
 		$this->load->vars($data);
 	}
@@ -486,6 +505,36 @@ class Auth_Controller extends CI_Controller {
 	}
 
 	// --------------------------------------------------------------
+	
+	/**
+	 * Check if ACL permits user to take action.
+	 *
+	 * @param  string  the concatenation of ACL category 
+	 *                 and action, joined by a period.
+	 * @return bool
+	 */
+	public function acl_permits( $str )
+	{
+		list( $category_name, $action_name ) = explode( '.', $str );
+
+		// We must have a legit category and action to proceed
+		if( strlen( $category_name ) < 1 OR strlen( $action_name ) < 1 )
+			return FALSE;
+
+		$auth_model = $this->authentication->auth_model;
+
+		// Get ACL for this user if not already available
+		if( is_null( $this->acl ) )
+		{
+			$this->acl = $this->$auth_model->acl_query( $this->auth_user_id );
+			$this->load->vars( array('acl' => $this->acl) );
+			$this->config->set_item( 'acl', $this->acl );
+		}
+
+		return $this->$auth_model->acl_permits( $category_name, $action_name );
+	}
+	
+	// -----------------------------------------------------------------------
 
 	/**
 	 * Force the request to be redirected to HTTPS, or optionally show 404.

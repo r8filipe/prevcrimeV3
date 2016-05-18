@@ -5,9 +5,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Community Auth</title>
-	<script src="<?php echo base_url(); ?>dist/js/prefixfree.min.js"></script>
-	<link href="<?php echo base_url(); ?>dist/custom/css/style.css" rel="stylesheet">
-
+	<style>
+		body{background:#fee;}
+		#menu{float:left;width:100%;background:pink;}
+		@media only screen and ( min-width:801px ){
+			#menu{float:right;width:25%;}
+		}
+	</style>
 	<?php
 		// Add any javascripts
 		if( isset( $javascripts ) )

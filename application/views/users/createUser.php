@@ -17,8 +17,7 @@ $this->lang->load('createUser_lang', $idiom);
 ?>
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?php echo $this->lang->line('createUser_containerTitle'); ?></h1>
-        <?php echo validation_errors(); ?>
+        <h1 class="page-header"><?php echo $this->lang->line('createUser_title'); ?></h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -30,14 +29,14 @@ $this->lang->load('createUser_lang', $idiom);
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <form role="form"  method="post" action="<?php echo base_url() . "Users/createUser" ?>">
+                <form role="form">
                     <div class="form-group">
                         <label><?php echo $this->lang->line('createUser_username'); ?></label>
-                        <input class="form-control" type="text" id="username" name="username">
+                        <input class="form-control" type="text" id="username">
                     </div>
                     <div class="form-group">
                         <label><?php echo $this->lang->line('createUser_email'); ?></label>
-                        <input class="form-control" type="email" id="email" name="email">
+                        <input class="form-control" type="email" id="email">
                     </div>
                     <div class="form-group">
                         <label><?php echo $this->lang->line('createUser_authLevel'); ?></label>
@@ -49,8 +48,14 @@ $this->lang->load('createUser_lang', $idiom);
                         </select>
                     </div>
                     <div class="form-group">
+                        <label><?php echo $this->lang->line('createUser_banned'); ?></label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="banned">
+                        </label>
+                    </div>
+                    <div class="form-group">
                         <label><?php echo $this->lang->line('createUser_password'); ?></label>
-                        <input class="form-control" type="password" id="password" name="password">
+                        <input class="form-control" type="password" id="password">
                     </div>
                     <button type="submit" class="btn btn-default"><?php echo $this->lang->line('createUser_submitBtn'); ?></button>
                     <button type="reset" class="btn btn-default"><?php echo $this->lang->line('createUser_resetBtn'); ?></button>

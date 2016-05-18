@@ -113,6 +113,24 @@ class Auth extends MY_Controller
 
                 echo '</pre>';
             }
+
+            if (config_item('add_acl_query_to_auth_functions') && $this->acl) {
+                echo '<br />
+                    <pre>';
+
+                print_r($this->acl);
+
+                echo '</pre>';
+            }
+
+            /**
+             * ACL usage doesn't require ACL be added to auth vars.
+             * If query not performed during authentication,
+             * the acl_permits function will query the DB.
+             */
+            if ($this->acl_permits('general.secret_action')) {
+                echo '<p>ACL permission grants action!</p>';
+            }
         } else {
             echo 'Nobody logged in.';
         }
@@ -143,18 +161,17 @@ class Auth extends MY_Controller
     {
         // Customize this array for your user
         $user_data = array(
-            'username' => 'henrique',
-            'passwd' => 'Henrique2',
-            'email' => 'henrique@example.com',
+            'username' => $this->input->post('username'),
+            'passwd' => $this->input->post('password'),
+            'email' => $this->input->post('email'),
             'auth_level' => '9', // 9 if you want to login @ examples/index.
         );
 
         $this->is_logged_in();
 
-        echo $this->load->view('examples/page_header', '', TRUE);
+        echo $this->load->view('templates/header');
 
         // Load resources
-        $this->load->model('examples_model');
         $this->load->model('validation_callables');
         $this->load->library('form_validation');
 
@@ -211,16 +228,15 @@ class Auth extends MY_Controller
                 $user_data['username'] = NULL;
             }
 
-            $this->db->set($user_data)
-                ->insert(config_item('user_table'));
+            $this->db->set($user_data)->insert(config_item('user_table'));
 
             if ($this->db->affected_rows() == 1)
-                echo '<h1>Congratulations</h1>' . '<p>User ' . $user_data['username'] . ' was created.</p>';
+                echo $this->load->view('users/users');
         } else {
             echo '<h1>User Creation Error(s)</h1>' . validation_errors();
         }
 
-        echo $this->load->view('examples/page_footer', '', TRUE);
+        echo $this->load->view('templates/footer');
     }
 
     // -----------------------------------------------------------------------
@@ -287,7 +303,7 @@ class Auth extends MY_Controller
                     } else {
                         /**
                          * Use the authentication libraries salt generator for a random string
-                         * that will be hashed and stored as the password recovery log.
+                         * that will be hashed and stored as the password recovery key.
                          * Method is called 4 times for a 88 character string, and then
                          * trimmed to 72 characters
                          */
@@ -437,7 +453,7 @@ class Auth extends MY_Controller
                     $.ajax({
                         type: 'post',
                         cache: false,
-                        url: '/examples/ajax_attempt_login',
+                        url: '/auth/ajax_attempt_login',
                         data: {
                             'login_string': $('#login_string').val(),
                             'login_pass': $('#login_pass').val(),
@@ -449,7 +465,7 @@ class Auth extends MY_Controller
                             console.log(response);
                             if(response.status == 1){
                                 $('form').replaceWith('<p>You are now logged in.</p>');
-                                $('#login-link').attr('href','/examples/logout').text('Logout');
+                                $('#login-link').attr('href','/auth/logout').text('Logout');
                                 $('#ajax-login-link').parent().hide();
                             }else if(response.status == 0 && response.on_hold){
                                 $('form').hide();
@@ -479,10 +495,11 @@ class Auth extends MY_Controller
      */
     public function ajax_attempt_login()
     {
-        if ($this->input->is_ajax_request()) {
-            // Allow this page to be an accepted login page
-            $this->config->set_item('allowed_pages_for_login', array('examples/ajax_attempt_login'));
+        $this->authentication->logout();
 
+        if ($this->input->post()) {
+            // Allow this page to be an accepted login page
+            $this->config->set_item('allowed_pages_for_login', array('auth/ajax_attempt_login'));
             // Make sure we aren't redirecting after a successful login
             $this->authentication->redirect_after_login = FALSE;
 
@@ -493,43 +510,43 @@ class Auth extends MY_Controller
             if ($this->auth_data)
                 $this->_set_user_variables();
 
-            // Call the post auth hook
+            // Call the post auth hookc
             $this->post_auth_hook();
-
             // Login attempt was successful
             if ($this->auth_data) {
-                echo json_encode(array(
-                    'status' => 1,
-                    'user_id' => $this->auth_user_id,
-                    'username' => $this->auth_username,
-                    'level' => $this->auth_level,
-                    'role' => $this->auth_role,
-                    'email' => $this->auth_email
-                ));
+
+                $message['status'] = 'success';
+                $message['user_id'] = $this->auth_user_id;
+                $message['username'] = $this->auth_username;
+                $message['level'] = $this->auth_level;
+                $message['role'] = $this->auth_role;
+                $message['email'] = $this->auth_email;
+
             } // Login attempt not successful
             else {
-                $this->tokens->name = 'login_token';
-
                 $on_hold = (
                     $this->authentication->on_hold === TRUE OR
                     $this->authentication->current_hold_status()
                 )
                     ? 1 : 0;
 
-                echo json_encode(array(
-                    'status' => 0,
-                    'count' => $this->authentication->login_errors_count,
-                    'on_hold' => $on_hold,
-                    'token' => $this->tokens->token()
-                ));
+                $message['status'] = 'fail';
+                $message['user_id'] = $this->auth_user_id;
+                $message['count'] = $this->authentication->login_errors_count;
+                $message['on_hold'] = $on_hold;
+                $message['token'] = $this->tokens->token();
+
+
             }
         } // Show 404 if not AJAX
         else {
-            show_404();
+            $message['status'] = 'error';
+            $message['message'] = 'formulario não preenchido';
         }
+        $this->output->set_content_type('application/json')
+            ->set_output(json_encode($message));
     }
-
-    // -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 }
 
 /* End of file Auth.php */

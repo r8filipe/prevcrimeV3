@@ -149,7 +149,7 @@ class Authentication
      */
     public function user_status($requirement)
     {
-        $string = strtolower($this->CI->input->post('login_string'));
+        $string = $this->CI->input->post('login_string');
         $password = $this->CI->input->post('login_pass');
         $form_token = $this->CI->input->post('login_token');
         $token_jar = $this->CI->tokens->jar;
