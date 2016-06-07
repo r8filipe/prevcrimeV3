@@ -29,7 +29,6 @@ class Webservice extends My_Controller
         if (!$this->db->insert('events', $data)) {
             $message['status'] = 'FAIL';
             $message['message'] = $this->db->error();
-
         } else {
             $message['status'] = 'SUCCESS';
             $message['message'] = 'Evento inserido comm sucesso';
@@ -75,6 +74,30 @@ class Webservice extends My_Controller
         $this->output->set_content_type('application/json')
             ->set_output(json_encode($message));
 
+    }
+
+    public function loginValidate()
+    {
+
+        $data['user_string'] = $this->input->post('login_string');
+        $data['passwd'] = $this->input->get('login_pass');
+        $data['requirement'] = 1;
+
+        $auth = new Authentication();
+        $auth_data = $auth->validateLogin($data);
+
+        $message['status'] = 'FAIL';
+        if (isset($auth_data->username)) {
+            $message['status'] = 'SUCCESS';
+            $data = array(
+                'user_id' => $auth_data->user_id,
+                'username' => $auth_data->username
+            );
+            $message['data'] = $data;
+        }
+
+        $this->output->set_content_type('application/json')
+            ->set_output(json_encode($data));
     }
 
     public function jar()

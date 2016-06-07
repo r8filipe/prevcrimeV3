@@ -28,9 +28,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $config['levels_and_roles'] = array(
-	'1' => 'customer',
-	'6' => 'manager',
-	'9' => 'admin'
+    '1' => 'customer',
+    '6' => 'manager',
+    '9' => 'admin'
 );
 
 /*
@@ -42,7 +42,7 @@ $config['levels_and_roles'] = array(
 */
 
 $config['groups'] = array(
-	'employees' => 'manager,admin'
+    'employees' => 'manager,admin'
 );
 
 /*
@@ -98,13 +98,13 @@ $config['deny_access_at'] = 10;
 */
 
 $config['denied_access_reason'] = array(
-	'0' => 'Not Specified',
-	'1' => 'Login Attempts',
-	'2' => 'Malicious User',
-	'3' => 'Hacking Attempt',
-	'4' => 'Spam',
-	'5' => 'Obscene Language',
-	'6' => 'Threatening Language'
+    '0' => 'Not Specified',
+    '1' => 'Login Attempts',
+    '2' => 'Malicious User',
+    '3' => 'Hacking Attempt',
+    '4' => 'Spam',
+    '5' => 'Obscene Language',
+    '6' => 'Threatening Language'
 );
 
 /*
@@ -141,7 +141,7 @@ $config['seconds_on_hold'] = 600;
 |
 */
 
-$config['disallow_multiple_logins'] = FALSE;
+$config['disallow_multiple_logins'] = TRUE;
 
 /*
 | -----------------------------------------------------------------
@@ -244,10 +244,10 @@ $config['http_user_cookie_elements'] = array('username');
 |
 */
 
-$config['http_tokens_cookie']  = 'httpTokens';
+$config['http_tokens_cookie'] = 'httpTokens';
 $config['https_tokens_cookie'] = 'httpsTokens';
-$config['token_jar_size']      = 32;
-$config['token_name']          = 'token';
+$config['token_jar_size'] = 32;
+$config['token_name'] = 'token';
 
 /*
 | -----------------------------------------------------------------

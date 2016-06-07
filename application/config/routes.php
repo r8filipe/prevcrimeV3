@@ -66,7 +66,7 @@ $route['users/info/(:user)'] = 'users/info/$1';
 
 //Web-service routes
 $route['webservice/report'] = 'webservice/report';
-$route['webservice/image/(:num)'] = 'webservice/image/$1';
+$route['webservice/image/(:num)'] = 'webservice/image/$n';
 $route['webservice/loginValidate'] = 'webservice/loginValidate';
 
 $route['events/createevents'] = 'events/insert_event_porto';

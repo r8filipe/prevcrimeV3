@@ -11,9 +11,9 @@ $config['zoom'] = 16;
 $config['long'] = -8.6105811;
 $config['lat'] = 41.1741937;
 
-$config['url'] = 'http://prevcrimeapp.fvinha.pt/';
+$config['url'] = 'http://localhost/prevcrime/';
 
 $config['hostname'] = 'localhost';
-$config['username'] = 'realami_prevcrim';
+$config['username'] = 'root';
 $config['password'] = 'sysdba';
-$config['database'] = 'realami_prevcrimeapp';
+$config['database'] = 'prevcrimeapp';
