@@ -26,5 +26,9 @@ $lang = array(
     'users_columnOptions'    => 'Options',
 
     'users_optionWatch'      => 'Details',
+    
+    'users_ACL'      => 'Access Controll',
+    
+    
 
 );

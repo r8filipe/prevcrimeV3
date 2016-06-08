@@ -141,6 +141,10 @@ $this->lang->load('master_lang', $idiom);
                         <a href="<?php echo base_url(); ?>users/createUser"><i
                                 class="fa fa-user"></i> <?php echo $this->lang->line('master_menuCreateUser'); ?></a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>users/createUser"><i
+                                class="fa fa-user"></i> <?php echo $this->lang->line('master_menuCreateUser'); ?></a>
+                    </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

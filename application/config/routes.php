@@ -74,4 +74,7 @@ $route['events/createevents'] = 'events/insert_event_porto';
 //Statistics routes
 $route['statistics'] = 'events/getstatistics';
 
+//acl routes
+$route['acl/aclcreate'] = 'ACL/aclcreate';
 $route[LOGIN_PAGE] = 'auth/login';
+

@@ -6,13 +6,14 @@
  * Time: 01:13
  */
 //Obtain User language
-if(isset($_SESSION['language'])){
+if (isset($_SESSION['language'])) {
     $idiom = $_SESSION['language'];
-}else {
+} else {
     $idiom = $this->config->item('language');
 }
 //Load of language file
 $this->lang->load('userDetails_lang', $idiom);
+$this->lang->load('users_lang', $idiom);
 ?>
 <div class="row">
     <div class="col-lg-12">
@@ -44,12 +45,48 @@ $this->lang->load('userDetails_lang', $idiom);
                         <p>{created_at}</p>
                         {/user}
                         <?php
-                            if ($this->auth_user_id == $user[0]["user_id"]){
-                                echo '<form action="'.base_url().'users/info/'.$this->auth_user_id.'">
+                        if ($this->auth_user_id == $user[0]["user_id"]) {
+                            echo '<form action="' . base_url() . 'users/info/' . $this->auth_user_id . '">
                                       <button type="submit" class="btn btn-default">Editar
                                       </form>';
-                            }
+                        }
                         ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.panel -->
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?php echo $this->lang->line('users_ACL'); ?>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!-- Lista de ACL-->
+                        <?php foreach ($acl as $key => $values) { ?>
+                            <div class="col-lg-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <?php echo $key; ?>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <?php foreach ($acl[$key] as $value) { ?>
+                                                    <?php echo $value['action_desc'] . '<br/>';
+                                                    ?>
+                                                <?php } ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.panel -->
+                            </div>
+                        <?php } ?>
+                        <!--FIM LISTA ACL-->
                     </div>
                 </div>
             </div>

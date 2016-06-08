@@ -27,4 +27,6 @@ $lang = array(
 
     'users_optionWatch'      => 'Ver',
 
+    'users_ACL'              => 'Controlo de Acesso',
+
 );

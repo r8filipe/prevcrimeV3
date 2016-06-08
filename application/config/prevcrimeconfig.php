@@ -11,7 +11,7 @@ $config['zoom'] = 16;
 $config['long'] = -8.6105811;
 $config['lat'] = 41.1741937;
 
-$config['url'] = 'http://localhost/prevcrime/';
+$config['url'] = 'http://localhost/prevcrimev3/';
 
 $config['hostname'] = 'localhost';
 $config['username'] = 'root';
