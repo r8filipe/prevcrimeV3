@@ -13,6 +13,7 @@ class Events extends My_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->helper('html');
+
     }
 
     public function index()
@@ -34,12 +35,21 @@ class Events extends My_Controller
             if ($this->input->post('category') != '') {
                 $filters['category'] = $this->input->post('category');
             }
+            if ($this->acl_permits('events.list_all_events')) {
+                $data['events'] = isset($filters) ? $this->events_model->get_events($filters) : $this->events_model->get_events();
+            } elseif ($this->acl_permits('events.list_my_events')) {
+                $filters['user_id'] = $this->auth_user_id;
+                $data['events'] = isset($filters) ? $this->events_model->get_events($filters) : $this->events_model->get_events();
+            } else {
+                redirect(site_url('/'));
+            }
 
-            $data['events'] = isset($filters) ? $this->events_model->get_events($filters) : $this->events_model->get_events();
             $data['categories'] = $this->categories_model->get_categories();
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('events/events', $data);
             $this->load->view('templates/footer');
+
+
         } else {
             $this->setup_login_form();
             $this->load->view('auth/login');
@@ -52,10 +62,19 @@ class Events extends My_Controller
         $this->load->library('parser');
         $this->load->helper('url');
 
+
         $this->is_logged_in();
 
         if (!empty($this->auth_role)) {
-            $data['events'] = $this->events_model->get_events();
+
+            if ($this->acl_permits('events.list_all_events')) {
+                $data['events'] = $this->events_model->get_events();
+            } elseif ($this->acl_permits('events.list_my_events')) {
+                $filters['user_id'] = $this->auth_user_id;
+                $data['events'] = isset($filters) ? $this->events_model->get_events($filters) : $this->events_model->get_events();
+            } else {
+                redirect(site_url('/'));
+            }
 
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('events/map', $data);
@@ -89,7 +108,15 @@ class Events extends My_Controller
         $this->is_logged_in();
 
         if (!empty($this->auth_role)) {
-            $data['event'] = $this->events_model->get_events($event);
+            if ($this->acl_permits('events.list_all_events')) {
+                $data['event'] = $this->events_model->get_events($event);
+            } elseif ($this->acl_permits('events.list_my_events')) {
+                $filters['user_id'] = $this->auth_user_id;
+                $filters['event_id'] = $event;
+                $data['event'] = $this->events_model->get_events($event);
+            } else {
+                redirect(site_url('/'));
+            }
             $data['photos'] = $this->photos_model->getPhotos($event);
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('events/details', $data);
@@ -142,17 +169,22 @@ class Events extends My_Controller
 
         $this->is_logged_in();
 
-        if (!empty($this->auth_role)) {
+        if ($this->acl_permits('statistics.list_statistics')) {
 
-            $data['events'] = $this->events_model->get_events_by_categories();
-            $data['title'] = $this->lang->line('stat_containerTitle');
+            if (!empty($this->auth_role)) {
 
-            $this->parser->parse('templates/header', $data);
-            $this->parser->parse('statistics/statistics', $data);
-            $this->load->view('templates/footer');
+                $data['events'] = $this->events_model->get_events_by_categories();
+                $data['title'] = $this->lang->line('stat_containerTitle');
+
+                $this->parser->parse('templates/header', $data);
+                $this->parser->parse('statistics/statistics', $data);
+                $this->load->view('templates/footer');
+            } else {
+                $this->setup_login_form();
+                $this->load->view('auth/login');
+            }
         } else {
-            $this->setup_login_form();
-            $this->load->view('auth/login');
+            redirect(site_url('/'));
         }
     }
 }

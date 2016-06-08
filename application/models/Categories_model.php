@@ -5,7 +5,7 @@
  * Date: 17/05/2016
  * Time: 01:02
  */
-class Categories_model extends CI_Model
+class Categories_model extends MY_Model
 {
 
     public function __construct(){

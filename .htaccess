@@ -1,10 +1,12 @@
-# MAKE SURE TO LEAVE THE DENY LIST AT THE TOP OF THE FILE !!!
+# MAKE SURE TO LEAVE THE NEXT TWO LINES HERE.
 # BEGIN DENY LIST --
 # END DENY LIST --
+
 <IfModule mod_rewrite.c>
 # Turn on URL rewriting
 RewriteEngine On
-
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token"
 # If your website begins from a folder e.g localhost/my_project then
 # you have to change it to: RewriteBase /my_project/
 # If your site begins from the root e.g. example.local/ then
@@ -25,6 +27,4 @@ RewriteRule ^(.*)$ - [PT,L]
 
 # Rewrite to index.php/URL
 RewriteRule ^(.*)$ index.php/$1 [PT,L]
-
-Allow from all
 </IfModule>

@@ -12,17 +12,17 @@ class ACL extends My_Controller
     {
         $this->db->insert('acl_categories', array(
             'category_name' => 'events',
-            'category_desc' => 'events Permissions'
+            'category_desc' => 'Events Permissions'
         ));
 
         $this->db->insert('acl_categories', array(
             'category_name' => 'users',
-            'category_desc' => 'users Permissions'
+            'category_desc' => 'Users Permissions'
         ));
 
         $this->db->insert('acl_categories', array(
             'category_name' => 'statistics',
-            'category_desc' => 'statistics Permissions'
+            'category_desc' => 'Statistics Permissions'
         ));
 
         $this->db->insert('acl_actions', array(
@@ -33,7 +33,7 @@ class ACL extends My_Controller
 
         $this->db->insert('acl_actions', array(
             'action_name' => 'list_my_events',
-            'action_desc' => 'List My Actions Events',
+            'action_desc' => 'List My Events',
             'category_id' => 1
         ));
 

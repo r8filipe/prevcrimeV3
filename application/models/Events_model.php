@@ -1,6 +1,6 @@
 <?php
 
-class Events_model extends CI_Model
+class Events_model extends MY_Model
 {
 
     public function __construct()
@@ -10,17 +10,23 @@ class Events_model extends CI_Model
 
     public function get_events($slug = FALSE)
     {
-        $this->db->select('events.id, lat, long, obs, sub_categories.occurrence, categories.category, local_type_id, address, events.created_at, icon');
+        $this->db->select('events.id,events.user_id, lat, long, obs, sub_categories.occurrence, categories.category, local_type_id, address, events.created_at, icon');
         $this->db->from('events');
         $this->db->join('sub_categories', 'sub_categories.id = events.sub_category_id');
         $this->db->join('categories', 'categories.id = sub_categories.category_id');
         //Verifies if there are filters to apply to the events table 
         if (is_array($slug)) {
-            if(isset($slug['begin_date']) && isset($slug['end_date'])) {
+            if (isset($slug['begin_date']) && isset($slug['end_date'])) {
                 $this->db->where('events.created_at BETWEEN "' . date('Y-m-d', strtotime($slug['begin_date'])) . '" and "' . date('Y-m-d', strtotime($slug['end_date'])) . '"');
             }
-            if(isset($slug['category'])) {
+            if (isset($slug['category'])) {
                 $this->db->where('categories.id =' . $slug['category']);
+            }
+            if (isset($slug['user_id'])) {
+                $this->db->where('events.user_id =' . $slug['user_id']);
+            }
+            if (isset($slug['event_id'])) {
+                $this->db->where('events.id =' . $slug['event_id']);
             }
             $query = $this->db->get();
             return $query->result_array();

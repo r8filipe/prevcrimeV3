@@ -6,9 +6,9 @@
  * Time: 01:13
  */
 //Obtain User language
-if(isset($_SESSION['language'])){
+if (isset($_SESSION['language'])) {
     $idiom = $_SESSION['language'];
-}else {
+} else {
     $idiom = $this->config->item('language');
 }
 //Load of language file
@@ -29,7 +29,7 @@ $this->lang->load('userEdit_lang', $idiom);
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <!-- form here -->
-                <form role="form"  method="post" action="<?php echo base_url() . "Users/editUser" ?>">
+                <form role="form" method="post" action="<?php echo base_url() . "Users/editUser" ?>">
                     {user}
                     <input type="hidden" name="user_id" value="{user_id}">
                     <div class="form-group">
@@ -41,8 +41,14 @@ $this->lang->load('userEdit_lang', $idiom);
                         <input class="form-control" type="password" id="password" name="password">
                     </div>
                     {/user}
-                    <button type="submit" class="btn btn-default"><?php echo $this->lang->line('editUser_submitBtn'); ?></button>
-                    <button type="reset" class="btn btn-default"><?php echo $this->lang->line('editUser_resetBtn'); ?></button>
+                    <?php
+                    if ($this->auth_user_id == $user[0]["user_id"] || in_array('users.edit_user', $this->acl)) {
+                        ?>
+                        <button type="submit"
+                                class="btn btn-default"><?php echo $this->lang->line('editUser_submitBtn'); ?></button>
+                    <?php } ?>
+                    <button type="reset"
+                            class="btn btn-default"><?php echo $this->lang->line('editUser_resetBtn'); ?></button>
                 </form>
             </div>
             <!-- /.panel-body -->

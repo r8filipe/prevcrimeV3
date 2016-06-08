@@ -61,6 +61,7 @@ $route['events/editEvent'] = 'events/editEvent';
 //Users routes
 $route['users'] = 'users';
 $route['users/details/(:user)'] = 'users/details/$1';
+$route['users/access/'] = 'users/access/';
 $route['users/createUser/'] = 'users/createUser/';
 $route['users/info/(:user)'] = 'users/info/$1';
 

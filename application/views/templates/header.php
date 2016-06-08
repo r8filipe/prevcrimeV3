@@ -1,8 +1,8 @@
 <?php
 //Obtain User language
-if(isset($_SESSION['language'])){
+if (isset($_SESSION['language'])) {
     $idiom = $_SESSION['language'];
-}else {
+} else {
     $idiom = $this->config->item('language');
 }
 //Load of language file
@@ -32,13 +32,19 @@ $this->lang->load('master_lang', $idiom);
     <link href="<?php echo base_url(); ?>dist/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
-    <link href="<?php echo base_url(); ?>dist/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
+          rel="stylesheet">
     <link href="<?php echo base_url(); ?>dist/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.dataTables.min.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.foundation.min.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.jqueryui.min.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>dist/datatables-plugins/Buttons/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.bootstrap.min.css"
+          rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.dataTables.min.css"
+          rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.foundation.min.css"
+          rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/FixedHeader/css/fixedHeader.jqueryui.min.css"
+          rel="stylesheet">
+    <link href="<?php echo base_url(); ?>dist/datatables-plugins/Buttons/css/buttons.dataTables.min.css"
+          rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="<?php echo base_url(); ?>dist/custom/css/sb-admin-2.css" rel="stylesheet">
@@ -47,7 +53,8 @@ $this->lang->load('master_lang', $idiom);
     <link href="<?php echo base_url(); ?>dist/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap-datepicker 1.6 -->
-    <link id="bsdp-css" href="<?php echo base_url(); ?>dist/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet">
+    <link id="bsdp-css" href="<?php echo base_url(); ?>dist/bootstrap-datepicker/css/bootstrap-datepicker3.css"
+          rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -86,20 +93,22 @@ $this->lang->load('master_lang', $idiom);
 
         <ul class="nav navbar-top-links navbar-right">
             <a href="<?php echo base_url(); ?>language_switch/switchLanguage/portuguese">
-                <img src="<?php echo base_url(); ?>dist/flags/Portugal.png" />
+                <img src="<?php echo base_url(); ?>dist/flags/Portugal.png"/>
             </a>
             <a href="<?php echo base_url(); ?>language_switch/switchLanguage/english">
-                <img src="<?php echo base_url(); ?>dist/flags/United_Kingdom.png" />
+                <img src="<?php echo base_url(); ?>dist/flags/United_Kingdom.png"/>
             </a>
             <a href="<?php echo base_url(); ?>language_switch/switchLanguage/french">
-                <img src="<?php echo base_url(); ?>dist/flags/France.png" />
+                <img src="<?php echo base_url(); ?>dist/flags/France.png"/>
             </a>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="<?php echo base_url(); ?>users/details/<?php echo $this->auth_user_id;?>"><i class="fa fa-user fa-fw"></i><?php echo $this->lang->line('master_dropuserProfile'); ?></a>
+                    <li><a href="<?php echo base_url(); ?>users/details/<?php echo $this->auth_user_id; ?>"><i
+                                class="fa fa-user fa-fw"></i><?php echo $this->lang->line('master_dropuserProfile'); ?>
+                        </a>
                     <li class="divider"></li>
                     <li><?php
                         $link_protocol = USE_SSL ? 'https' : NULL;
@@ -129,22 +138,26 @@ $this->lang->load('master_lang', $idiom);
                         <a href="<?php echo base_url(); ?>events/map"><i
                                 class="fa fa-globe"></i> <?php echo $this->lang->line('master_menuMap'); ?></a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>statistics"><i
-                                class="fa fa-area-chart"></i> <?php echo $this->lang->line('master_menuStatistics'); ?></a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>users"><i
-                                class="fa fa-users"></i> <?php echo $this->lang->line('master_menuUsers'); ?></a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>users/createUser"><i
-                                class="fa fa-user"></i> <?php echo $this->lang->line('master_menuCreateUser'); ?></a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>users/createUser"><i
-                                class="fa fa-user"></i> <?php echo $this->lang->line('master_menuCreateUser'); ?></a>
-                    </li>
+                    <?php if (in_array('statistics.list_statistics', $this->acl)) { ?>
+                        <li>
+                            <a href="<?php echo base_url(); ?>statistics"><i
+                                    class="fa fa-area-chart"></i> <?php echo $this->lang->line('master_menuStatistics'); ?>
+                            </a>
+                        </li>
+                    <?php } ?>
+                    <?php if (in_array('users.list_user', $this->acl)) { ?>
+                        <li>
+                            <a href="<?php echo base_url(); ?>users"><i
+                                    class="fa fa-users"></i> <?php echo $this->lang->line('master_menuUsers'); ?></a>
+                        </li>
+                    <?php } ?>
+                    <?php if (in_array('users.create_user', $this->acl)) { ?>
+                        <li>
+                            <a href="<?php echo base_url(); ?>users/createUser"><i
+                                    class="fa fa-user"></i> <?php echo $this->lang->line('master_menuCreateUser'); ?>
+                            </a>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

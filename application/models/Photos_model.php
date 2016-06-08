@@ -1,6 +1,6 @@
 <?php
 
-class Photos_model extends CI_Model
+class Photos_model extends MY_Model
 {
 
     public function __construct()

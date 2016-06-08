@@ -152,4 +152,46 @@ delimiter ;
 -- Table structure for table `acl_categories`
 -- 
 
+CREATE TABLE `acl_categories` (
+  `category_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(100) NOT NULL COMMENT 'No periods allowed!',
+  `category_desc` varchar(100) NOT NULL COMMENT 'Human readable description',
+  PRIMARY KEY (`category_id`),
+  UNIQUE KEY `category_name` (`category_name`),
+  UNIQUE KEY `category_desc` (`category_desc`)
+) ENGINE = InnoDB DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `acl_actions`
+-- 
+
+CREATE TABLE `acl_actions` (
+  `action_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `action_name` varchar(100) NOT NULL COMMENT 'No periods allowed!',
+  `action_desc` varchar(100) NOT NULL COMMENT 'Human readable description',
+  `category_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`action_id`),
+  FOREIGN KEY (`category_id`) REFERENCES `acl_categories`(`category_id`) 
+  ON DELETE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `acl`
+-- 
+
+CREATE TABLE `acl` (
+  `ai` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `action_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`ai`),
+  FOREIGN KEY (`action_id`) REFERENCES `acl_actions`(`action_id`) 
+  ON DELETE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) 
+  ON DELETE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+
+-- --------------------------------------------------------

@@ -60,7 +60,7 @@ $config['groups'] = [
 |
 */
 
-$config['add_acl_query_to_auth_functions'] = FALSE;
+$config['add_acl_query_to_auth_functions'] = TRUE;
 
 /*
 | -----------------------------------------------------------------

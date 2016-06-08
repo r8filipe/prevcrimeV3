@@ -6,7 +6,7 @@
  * Time: 01:38
  */
 
-class Users_model extends CI_Model
+class Users_model extends MY_Model
 {
 
     public function __construct()

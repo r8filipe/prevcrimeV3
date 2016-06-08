@@ -24,7 +24,6 @@ class Users extends My_Controller
         $this->load->library('parser');
         $this->load->helper('url');
         $this->is_logged_in();
-
         if (!empty($this->auth_role)) {
             $data['users'] = $this->users_model->get_users();
 
@@ -44,100 +43,111 @@ class Users extends My_Controller
         $this->is_logged_in();
         if (!empty($this->auth_role)) {
 
-//            $acl_categories = $this->acl_model->get_acl_categories();
-//            foreach ($acl_categories as $category) {
-//                $data['acl'][$category['category_desc']] = $this->acl_model->get_acl_actions($category['category_id']);
-////                foreach ($data['acl'][$category['category_desc']] as $actions) {
-////                    $data['acl'][$category['category_desc']]['active'] = $this->acl_model->get_acl_by_user($actions['action_id'], $user);
-////
-////                }
-//        }
+            $data['acl'] = $this->acl_model->get_acl_by_user($user);
+            $data['acl_categories'] = $this->acl_model->get_acl_categories();
+            $data['user'] = $this->users_model->get_users($user);
+            $data['user'][0]['banned'] = $data['user'][0]['banned'] == 0 ? 'Não' : 'Sim';
 
-        $acl = $this->acl_model->get_acl_by_user($user);
-            echo '<pre>';
-        print_r($acl);
-            echo '</pre>';
-        $data['user'] = $this->users_model->get_users($user);
-        $data['user'][0]['banned'] = $data['user'][0]['banned'] == 0 ? 'Não' : 'Sim';
-
-        $this->parser->parse('templates/header', $data);
-        $this->parser->parse('users/details', $data);
-        $this->load->view('templates/footer');
-    } else
-{
-$this->setup_login_form();
-$this->load->view('auth/login');
-}
-}
-
-public
-function info()
-{
-    $this->load->library('parser');
-    $this->load->helper('url');
-    $this->is_logged_in();
-    if (!empty($this->auth_role)) {
-        $data['user'] = $this->users_model->get_users($this->auth_user_id);
-
-        $this->parser->parse('templates/header', $data);
-        $this->parser->parse('users/editUser', $data);
-        $this->load->view('templates/footer');
-    } else {
-        $this->setup_login_form();
-        $this->load->view('auth/login');
-    }
-}
-
-public
-function createUser()
-{
-    $this->load->library('parser');
-    $this->load->helper('url');
-    $this->load->helper('form');
-    $this->load->library('form_validation');
-    $data['title'] = 'Novo Utilizador';
-    $this->is_logged_in();
-
-    $this->form_validation->set_rules('username', 'username', 'required');
-
-    if (!empty($this->auth_role)) {
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('users/createUser');
+            $this->parser->parse('templates/header', $data);
+            $this->parser->parse('users/details', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->users_model->insert();
+            $this->setup_login_form();
+            $this->load->view('auth/login');
+        }
+    }
+
+    public function info()
+    {
+        $this->load->library('parser');
+        $this->load->helper('url');
+        $this->is_logged_in();
+        if (!empty($this->auth_role)) {
+            $data['user'] = $this->users_model->get_users($this->auth_user_id);
+
+            $this->parser->parse('templates/header', $data);
+            $this->parser->parse('users/editUser', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->setup_login_form();
+            $this->load->view('auth/login');
+        }
+    }
+
+    public function createUser()
+    {
+        $this->load->library('parser');
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $data['acl'] = $this->acl_model->get_acl();
+        $data['acl_categories'] = $this->acl_model->get_acl_categories();
+        $data['title'] = 'Novo Utilizador';
+        $this->is_logged_in();
+
+        $this->form_validation->set_rules('username', 'required');
+
+        if (!empty($this->auth_role)) {
+            if ($this->form_validation->run() === FALSE) {
+                $this->load->view('templates/header', $data);
+                $this->load->view('users/createUser');
+                $this->load->view('templates/footer');
+            } else {
+                $user = $this->users_model->insert();
+                var_dump($user);
+                $this->acl_model->set_acl_user($user['id'], $data);
+
+                $data['users'] = $this->users_model->get_users();
+                $this->parser->parse('templates/header', $data);
+                $this->parser->parse('users/users', $data);
+                $this->load->view('templates/footer');
+            }
+        } else {
+            $this->setup_login_form();
+            $this->load->view('auth/login');
+        }
+    }
+
+    public function editUser()
+    {
+        $this->load->library('parser');
+        $this->load->helper('url');
+        $this->is_logged_in();
+        if (!empty($this->auth_role)) {
+            $id = $this->input->post('user_id');
+            $data = array('username' => strtolower($this->input->post('username')),
+                'passwd' => $this->authentication->hash_passwd($this->input->post('password'))
+            );
+            $this->users_model->edit_user($id, $data);
+
             $data['users'] = $this->users_model->get_users();
             $this->parser->parse('templates/header', $data);
             $this->parser->parse('users/users', $data);
             $this->load->view('templates/footer');
+        } else {
+            $this->setup_login_form();
+            $this->load->view('auth/login');
         }
-    } else {
-        $this->setup_login_form();
-        $this->load->view('auth/login');
     }
-}
 
-public
-function editUser()
-{
-    $this->load->library('parser');
-    $this->load->helper('url');
-    $this->is_logged_in();
-    if (!empty($this->auth_role)) {
-        $id = $this->input->post('user_id');
-        $data = array('username' => strtolower($this->input->post('username')),
-            'passwd' => $this->authentication->hash_passwd($this->input->post('password'))
-        );
-        $this->users_model->edit_user($id, $data);
+    public function access()
+    {
+        $this->load->library('parser');
+        $this->load->helper('url');
+        $this->is_logged_in();
+        if (!empty($this->auth_role)) {
+            $id = $this->input->post('user_id');
+            $data = $this->input->post('acl');
 
-        $data['users'] = $this->users_model->get_users();
-        $this->parser->parse('templates/header', $data);
-        $this->parser->parse('users/users', $data);
-        $this->load->view('templates/footer');
-    } else {
-        $this->setup_login_form();
-        $this->load->view('auth/login');
+            $this->acl_model->set_acl_user($id, $data);
+
+            $data['users'] = $this->users_model->get_users();
+            $this->parser->parse('templates/header', $data);
+            $this->parser->parse('users/users', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->setup_login_form();
+            $this->load->view('auth/login');
+        }
     }
-}
 }
