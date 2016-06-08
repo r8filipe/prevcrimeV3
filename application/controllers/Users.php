@@ -76,9 +76,11 @@ class Users extends My_Controller
 
     public function createUser()
     {
-        $this->load->library('parser');
+
         $this->load->helper('url');
         $this->load->helper('form');
+        $this->load->library('parser');
+
         $this->load->library('form_validation');
         $data['acl'] = $this->acl_model->get_acl();
         $data['acl_categories'] = $this->acl_model->get_acl_categories();
